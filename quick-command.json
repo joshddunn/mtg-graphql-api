@@ -1,0 +1,20 @@
+{
+  "editor": "mvim",
+  "command": {
+    "watch": "qc cli watch",
+    "gif": "qc cli gif",
+    "rw": "docker-compose run web",
+    "rails": "docker-compose run web rails",
+    "ub": "docker-compose up --build",
+    "dbc": "docker-compose run web rake db:create",
+    "u": "docker-compose up",
+    "d": "docker-compose down",
+    "s": "rm tmp/pids/server.pid; docker-compose up"
+  },
+  "watch": {
+    "install": {
+      "file": "install.sh",
+      "action": "echo 'hello'"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+class ColorIdentity < ApplicationRecord
+end
