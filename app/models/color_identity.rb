@@ -1,2 +1,0 @@
-class ColorIdentity < ApplicationRecord
-end
