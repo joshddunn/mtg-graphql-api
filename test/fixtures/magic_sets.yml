@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  release_date: 2018-01-14
+  border: MyString
+  type: 
+  mkm_name: MyString
+  mkm_id: 1
+  magic_cards_info_code: MyString
+  gatherer_code: MyString
+  old_code: MyString
+  online_only: false
+  block: one
+
+two:
+  name: MyString
+  code: MyString
+  release_date: 2018-01-14
+  border: MyString
+  type: 
+  mkm_name: MyString
+  mkm_id: 1
+  magic_cards_info_code: MyString
+  gatherer_code: MyString
+  old_code: MyString
+  online_only: false
+  block: two

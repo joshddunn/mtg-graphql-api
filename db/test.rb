@@ -67,14 +67,14 @@ data_hash.each do |key, value|
   end
 end
 
-puts set_keys
+# puts set_keys
   # booster (array)
   # magic rarities codes (array)
   # translations (hash)
   # alternative names (array)
 
 
-# puts card_keys
+puts card_keys
 # puts supertypes.length
 # puts subtypes.length
 # puts types.length

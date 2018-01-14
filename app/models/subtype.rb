@@ -1,0 +1,2 @@
+class Subtype < ApplicationRecord
+end

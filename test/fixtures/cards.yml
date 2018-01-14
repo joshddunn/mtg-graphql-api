@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  artist: one
+  cmc: 1
+  identifier: MyString
+  image_name: MyString
+  layout: 1
+  mana_cost: MyString
+  name: MyString
+  number: MyString
+  power: MyString
+  rarity: MyString
+  text: MyText
+  toughness: MyString
+  type: 
+  watermark: MyString
+  flavor: MyString
+  mci_number: MyString
+  name: MyString
+  border: MyString
+  release_date: 2018-01-14
+  loyalty: 1
+  reserved: false
+  hand: 1
+  life: 1
+  timeshifted: false
+  starter: false
+
+two:
+  artist: two
+  cmc: 1
+  identifier: MyString
+  image_name: MyString
+  layout: 1
+  mana_cost: MyString
+  name: MyString
+  number: MyString
+  power: MyString
+  rarity: MyString
+  text: MyText
+  toughness: MyString
+  type: 
+  watermark: MyString
+  flavor: MyString
+  mci_number: MyString
+  name: MyString
+  border: MyString
+  release_date: 2018-01-14
+  loyalty: 1
+  reserved: false
+  hand: 1
+  life: 1
+  timeshifted: false
+  starter: false
