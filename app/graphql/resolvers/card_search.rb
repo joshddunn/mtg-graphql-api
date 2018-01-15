@@ -1,0 +1,44 @@
+require 'search_object/plugin/graphql'
+
+class Resolvers::CardSearch
+  include SearchObject.module(:graphql)
+
+  scope { Card.all }
+
+  type Types::CardConnectionType
+
+  CardFilter = GraphQL::InputObjectType.define do
+    name 'CardFilter'
+
+    argument :OR, -> { types[CardFilter] }
+
+    argument :name, types.String
+  end
+
+  option :filter, type: CardFilter, with: :apply_filter
+  option :order, type: types[types.String], with: :apply_order
+
+  def apply_filter(scope, value)
+    branches = normalize_filters(value).reduce { |a,b| a.or(b) }
+    scope.merge branches
+  end
+
+  def apply_order(scope, value)
+    value.each do |v|
+      scope = scope.order(v)
+    end
+    scope
+  end
+
+  def normalize_filters(value, branches = [])
+    scope = Card.all
+
+    scope = scope.where(name: value['name']) unless value['name'].nil?
+
+    branches << scope
+
+    value['OR'].reduce(branches) { |s,v| normalize_filters(v, s) } if value['OR'].present?
+
+    branches
+  end
+end

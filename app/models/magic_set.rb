@@ -1,5 +1,5 @@
 class MagicSet < ApplicationRecord
-  belongs_to :block
+  belongs_to :block, optional: true
 
   has_many :alternative_names
   has_many :boosters

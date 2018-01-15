@@ -5,7 +5,7 @@ class CreateMagicSets < ActiveRecord::Migration[5.1]
       t.string :code
       t.date :release_date
       t.string :border
-      t.string :type
+      t.string :set_type
       t.string :mkm_name
       t.integer :mkm_id
       t.string :magic_cards_info_code

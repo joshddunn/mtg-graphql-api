@@ -1,5 +1,6 @@
 class Card < ApplicationRecord
   belongs_to :artist
+  belongs_to :magic_set
 
   has_many :color_identity_associations
   has_many :color_identities, through: :color_identity_associations

@@ -52,3 +52,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'graphql', '~> 1.7', '>= 1.7.8'
+gem 'graphiql-rails', '~> 1.4', '>= 1.4.8'
+
+gem 'search_object', '1.2.0'
+gem 'search_object_graphql', '0.1'

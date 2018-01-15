@@ -2,7 +2,9 @@ class CreateCards < ActiveRecord::Migration[5.1]
   def change
     create_table :cards do |t|
       t.string :identifier
+      t.integer :multiverseid
       t.references :artist, foreign_key: true
+      t.references :magic_set, foreign_key: true
       t.integer :cmc
       t.string :image_name
       t.integer :layout
@@ -13,7 +15,7 @@ class CreateCards < ActiveRecord::Migration[5.1]
       t.string :rarity
       t.text :text
       t.string :toughness
-      t.string :type
+      t.string :card_type
       t.string :watermark
       t.string :flavor
       t.string :mci_number

@@ -53,7 +53,9 @@ ActiveRecord::Schema.define(version: 20180115021213) do
 
   create_table "cards", force: :cascade do |t|
     t.string "identifier"
+    t.integer "multiverseid"
     t.bigint "artist_id"
+    t.bigint "magic_set_id"
     t.integer "cmc"
     t.string "image_name"
     t.integer "layout"
@@ -64,7 +66,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.string "rarity"
     t.text "text"
     t.string "toughness"
-    t.string "type"
+    t.string "card_type"
     t.string "watermark"
     t.string "flavor"
     t.string "mci_number"
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_cards_on_artist_id"
+    t.index ["magic_set_id"], name: "index_cards_on_magic_set_id"
   end
 
   create_table "color_associations", force: :cascade do |t|
@@ -124,7 +127,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.string "code"
     t.date "release_date"
     t.string "border"
-    t.string "type"
+    t.string "set_type"
     t.string "mkm_name"
     t.integer "mkm_id"
     t.string "magic_cards_info_code"
@@ -204,6 +207,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
   add_foreign_key "boosters", "card_descriptions"
   add_foreign_key "boosters", "magic_sets"
   add_foreign_key "cards", "artists"
+  add_foreign_key "cards", "magic_sets"
   add_foreign_key "color_associations", "cards"
   add_foreign_key "color_associations", "colors"
   add_foreign_key "color_identity_associations", "cards"
