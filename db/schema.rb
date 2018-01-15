@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114060222) do
+ActiveRecord::Schema.define(version: 20180115021213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 20180114060222) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cards", primary_key: "multiverseid", force: :cascade do |t|
-    t.string "id"
+  create_table "cards", force: :cascade do |t|
+    t.string "identifier"
     t.bigint "artist_id"
     t.integer "cmc"
     t.string "image_name"
@@ -176,6 +176,15 @@ ActiveRecord::Schema.define(version: 20180114060222) do
     t.index ["magic_set_id"], name: "index_translations_on_magic_set_id"
   end
 
+  create_table "type_associations", force: :cascade do |t|
+    t.bigint "card_id"
+    t.bigint "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_type_associations_on_card_id"
+    t.index ["type_id"], name: "index_type_associations_on_type_id"
+  end
+
   create_table "types", force: :cascade do |t|
     t.string "identifier"
     t.datetime "created_at", null: false
@@ -195,17 +204,19 @@ ActiveRecord::Schema.define(version: 20180114060222) do
   add_foreign_key "boosters", "card_descriptions"
   add_foreign_key "boosters", "magic_sets"
   add_foreign_key "cards", "artists"
-  add_foreign_key "color_associations", "cards", primary_key: "multiverseid"
+  add_foreign_key "color_associations", "cards"
   add_foreign_key "color_associations", "colors"
-  add_foreign_key "color_identity_associations", "cards", primary_key: "multiverseid"
+  add_foreign_key "color_identity_associations", "cards"
   add_foreign_key "color_identity_associations", "color_identities"
   add_foreign_key "magic_rarities_codes", "magic_sets"
   add_foreign_key "magic_sets", "blocks"
-  add_foreign_key "subtype_associations", "cards", primary_key: "multiverseid"
+  add_foreign_key "subtype_associations", "cards"
   add_foreign_key "subtype_associations", "subtypes"
-  add_foreign_key "supertype_associations", "cards", primary_key: "multiverseid"
+  add_foreign_key "supertype_associations", "cards"
   add_foreign_key "supertype_associations", "supertypes"
   add_foreign_key "translations", "magic_sets"
-  add_foreign_key "variations", "cards", column: "variation_id", primary_key: "multiverseid"
-  add_foreign_key "variations", "cards", primary_key: "multiverseid"
+  add_foreign_key "type_associations", "cards"
+  add_foreign_key "type_associations", "types"
+  add_foreign_key "variations", "cards"
+  add_foreign_key "variations", "cards", column: "variation_id"
 end

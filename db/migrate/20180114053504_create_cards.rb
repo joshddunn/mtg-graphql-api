@@ -1,8 +1,7 @@
 class CreateCards < ActiveRecord::Migration[5.1]
   def change
-    create_table :cards, id: false do |t|
-      t.primary_key :multiverseid
-      t.string :id
+    create_table :cards do |t|
+      t.string :identifier
       t.references :artist, foreign_key: true
       t.integer :cmc
       t.string :image_name
