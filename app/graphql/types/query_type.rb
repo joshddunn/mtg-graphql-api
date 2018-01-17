@@ -2,7 +2,7 @@ Types::QueryType = GraphQL::ObjectType.define do
   name "Query"
 
   connection :Cards, function: Resolvers::CardSearch
-  connection :MagicSets, function: Resolvers::MagicSetSearch
+  connection :MagicSets, function: Resolvers::MagicSetSearch, max_page_size: 3
 
   field :CardTypes, types[Types::TypeType] do
     resolve -> (obj, args, ctx) {

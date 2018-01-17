@@ -9,4 +9,5 @@ Types::MagicSetConnectionType = Types::MagicSetType.define_connection do
       obj.nodes.count
     }
   end
+
 end

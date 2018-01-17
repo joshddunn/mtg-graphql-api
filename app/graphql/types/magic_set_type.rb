@@ -18,7 +18,8 @@ Types::MagicSetType = GraphQL::ObjectType.define do
 
   field :alternativeNames, types[Types::AlternativeNameType], "", property: :alternative_names
   field :boosters, types[Types::BoosterType], "", property: :boosters
-  field :cards, types[Types::CardType], "", property: :cards
   field :magicRaritiesCodes, types[Types::MagicRaritiesCodeType], "", property: :magic_rarities_codes
   field :translations, types[Types::TranslationType], "", property: :translations
+
+  connection :cards, Types::CardConnectionType, "", property: :cards
 end

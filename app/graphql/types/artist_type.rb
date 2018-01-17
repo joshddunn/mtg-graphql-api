@@ -5,5 +5,5 @@ Types::ArtistType = GraphQL::ObjectType.define do
   # field :id, !types.ID, "", property: :id
   field :identifier, types.String, "", property: :identifier
 
-  field :cards, types[Types::CardType], "", property: :cards
+  connection :cards, Types::CardConnectionType, "", property: :cards
 end
