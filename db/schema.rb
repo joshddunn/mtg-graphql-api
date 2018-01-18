@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115021213) do
+ActiveRecord::Schema.define(version: 20180118022834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_alternative_names_on_identifier"
     t.index ["magic_set_id"], name: "index_alternative_names_on_magic_set_id"
   end
 
@@ -27,12 +28,14 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_artists_on_identifier"
   end
 
   create_table "blocks", force: :cascade do |t|
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_blocks_on_identifier"
   end
 
   create_table "boosters", force: :cascade do |t|
@@ -49,6 +52,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_card_descriptions_on_identifier"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -153,6 +157,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_subtypes_on_identifier"
   end
 
   create_table "supertype_associations", force: :cascade do |t|
@@ -168,6 +173,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_supertypes_on_identifier"
   end
 
   create_table "translations", force: :cascade do |t|
@@ -192,6 +198,7 @@ ActiveRecord::Schema.define(version: 20180115021213) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_types_on_identifier"
   end
 
   create_table "variations", force: :cascade do |t|
