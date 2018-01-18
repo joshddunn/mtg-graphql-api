@@ -13,6 +13,9 @@ class Resolvers::CardSearch
     argument :OR, -> { types[CardFilter] }
 
     argument :name, types.String
+    argument :type, types.String
+    argument :subtype, types.String
+    argument :supertype, types.String
   end
 
   option :filter, type: CardFilter, with: :apply_filter
@@ -34,6 +37,9 @@ class Resolvers::CardSearch
     scope = Card.all
 
     scope = scope.where(name: value['name']) unless value['name'].nil?
+    scope = scope.includes(:types).where("types.identifier": value['type']) unless value['type'].nil?
+    scope = scope.includes(:subtypes).where("subtypes.identifier": value['subtype']) unless value['subtype'].nil?
+    scope = scope.includes(:supertypes).where("supertypes.identifier": value['supertype']) unless value['supertype'].nil?
 
     branches << scope
 
