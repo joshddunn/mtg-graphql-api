@@ -58,3 +58,5 @@ gem 'graphiql-rails', '~> 1.4', '>= 1.4.8'
 
 gem 'search_object', '1.2.0'
 gem 'search_object_graphql', '0.1'
+gem 'graphql-docs', '~> 1.0', '>= 1.0.1'
+gem 'commonmarker', '~> 0.17.7.1'
