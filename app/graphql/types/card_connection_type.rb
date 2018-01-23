@@ -1,6 +1,6 @@
 Types::CardConnectionType = Types::CardType.define_connection do
   name "CardConnection"
-  description ""
+  description "Card information."
 
   field :totalCount do
     type types.Int

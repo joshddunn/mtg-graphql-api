@@ -2,7 +2,7 @@
   <li>
     <ul class="menu-root">
       <li>
-        <a href="<%= base_url.present? ? base_url : '/' %>">MtgQL</a>
+        <a href="<%= base_url.present? ? base_url : '/' %>">MTGQL (beta)</a>
     </ul>
   </li>
 
@@ -54,19 +54,21 @@
     </li>
   <% end %>
 
-  <li>
-    <p><a href="<%= base_url %>/interface">Interfaces</a></p>
-    <ul class="menu-root">
-      <% graphql_interface_types.().each do |type| %>
-        <% @name = type[:name] %>
-        <li>
-          <a href="<%= base_url %>/interface/<%= @name.downcase %>/" class="sidebar-link<% if title == @name %> current<% end %>">
-            <%= @name %>
-          </a>
-        </li>
-      <% end %>
-    </ul>
-  </li>
+  <% if graphql_interface_types.().count > 0 %>
+    <li>
+      <p><a href="<%= base_url %>/interface">Interfaces</a></p>
+      <ul class="menu-root">
+        <% graphql_interface_types.().each do |type| %>
+          <% @name = type[:name] %>
+          <li>
+            <a href="<%= base_url %>/interface/<%= @name.downcase %>/" class="sidebar-link<% if title == @name %> current<% end %>">
+              <%= @name %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
 
   <li>
     <p><a href="<%= base_url %>/enum">Enums</a></p>
@@ -82,19 +84,21 @@
     </ul>
   </li>
 
-  <li>
-    <p><a href="<%= base_url %>/union">Unions</a></p>
-    <ul class="menu-root">
-      <% graphql_union_types.().each do |type| %>
-      <% @name = type[:name] %>
-      <li>
-        <a href="<%= base_url %>/union/<%= @name.downcase %>/" class="sidebar-link<% if title == @name %> current<% end %>">
-          <%= @name %>
-        </a>
-      </li>
-      <% end %>
-    </ul>
-  </li>
+  <% if graphql_union_types.().count > 0 %>
+    <li>
+      <p><a href="<%= base_url %>/union">Unions</a></p>
+      <ul class="menu-root">
+        <% graphql_union_types.().each do |type| %>
+        <% @name = type[:name] %>
+        <li>
+          <a href="<%= base_url %>/union/<%= @name.downcase %>/" class="sidebar-link<% if title == @name %> current<% end %>">
+            <%= @name %>
+          </a>
+        </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
 
   <li>
     <p><a href="<%= base_url %>/input_object">Input Objects</a></p>

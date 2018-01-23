@@ -100,6 +100,7 @@ type Card {
   watermark: String
 }
 
+# Card information.
 type CardConnection {
   # A list of edges.
   edges: [CardEdge]
@@ -131,10 +132,12 @@ input CardFilter {
 }
 
 type Color {
+  # Name of card colors. E.g., Blue, Black, White, etc.
   identifier: String
 }
 
 type ColorIdentity {
+  # Name of card color identities. E.g., U, B, etc.
   identifier: String
 }
 
@@ -230,7 +233,9 @@ type PageInfo {
   startCursor: String
 }
 
+# testing
 type Query {
+  # Card type information.
   CardTypes: [Type]
   Cards(
     # Returns the elements in the list that come after the specified global ID.
@@ -247,7 +252,11 @@ type Query {
     last: Int
     order: [String]
   ): CardConnection
+
+  # Color identity information.
   ColorIdentities: [ColorIdentity]
+
+  # Color information.
   Colors: [Color]
   MagicSets(
     # Returns the elements in the list that come after the specified global ID.
@@ -264,15 +273,21 @@ type Query {
     last: Int
     order: [String]
   ): MagicSetConnection
+
+  # Card subtype information.
   Subtypes: [Subtype]
+
+  # Card supertype information.
   Supertypes: [Supertype]
 }
 
 type Subtype {
+  # Name of card subtype. E.g., Merfolk, Wizard, etc.
   identifier: String
 }
 
 type Supertype {
+  # Name of card supertype. E.g., Basic, Legendary, etc.
   identifier: String
 }
 
@@ -285,5 +300,6 @@ type Translation {
 }
 
 type Type {
+  # Name of card type. E.g., Instant, Land, Enchantment etc.
   identifier: String
 }

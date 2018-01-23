@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="__TypeKind GraphQL documentation">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>MTGQL | __typekind</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
+    <script>
+
+    // Add anchors on DOMContentLoaded
+    document.addEventListener("DOMContentLoaded", function(event) {
+      anchors.options = {
+        placement: 'left',
+        visible: 'hover',
+        icon: '¶'
+      };
+      anchors.add('h3');
+
+      document.getElementById("mobile-header").addEventListener("click", function() {
+        var body = document.getElementsByTagName("body")[0];
+
+        body.classList.toggle("sidebar-open");
+      });
+    });
+
+
+    </script>
+  </head>
+  <body>
+
+    <div id="wrap">
+      <div id="header">
+      </div>
+      <div id="sidebar">
+        <ul class="categories">
+  <li>
+    <ul class="menu-root">
+      <li>
+        <a href="/">MTGQL (beta)</a>
+    </ul>
+  </li>
+
+  <li>
+    <p>Queries</p>
+    <ul class="menu-root">
+      <li>
+        <a href="/operation/query/" class="sidebar-link">
+          Query
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+
+  <li>
+    <p><a href="/object">Objects</a></p>
+    <ul class="menu-root">
+      
+        
+      <li>
+        <a href="/object/alternativename/" class="sidebar-link">
+          AlternativeName
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/artist/" class="sidebar-link">
+          Artist
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/block/" class="sidebar-link">
+          Block
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/booster/" class="sidebar-link">
+          Booster
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/card/" class="sidebar-link">
+          Card
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/cardconnection/" class="sidebar-link">
+          CardConnection
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/carddescription/" class="sidebar-link">
+          CardDescription
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/cardedge/" class="sidebar-link">
+          CardEdge
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/color/" class="sidebar-link">
+          Color
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/coloridentity/" class="sidebar-link">
+          ColorIdentity
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/magicraritiescode/" class="sidebar-link">
+          MagicRaritiesCode
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/magicset/" class="sidebar-link">
+          MagicSet
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/magicsetconnection/" class="sidebar-link">
+          MagicSetConnection
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/magicsetedge/" class="sidebar-link">
+          MagicSetEdge
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/pageinfo/" class="sidebar-link">
+          PageInfo
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/subtype/" class="sidebar-link">
+          Subtype
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/supertype/" class="sidebar-link">
+          Supertype
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/translation/" class="sidebar-link">
+          Translation
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/type/" class="sidebar-link">
+          Type
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/__directive/" class="sidebar-link">
+          __Directive
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/__enumvalue/" class="sidebar-link">
+          __EnumValue
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/__field/" class="sidebar-link">
+          __Field
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/__inputvalue/" class="sidebar-link">
+          __InputValue
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/__schema/" class="sidebar-link">
+          __Schema
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/__type/" class="sidebar-link">
+          __Type
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+
+  
+
+  
+
+  <li>
+    <p><a href="/enum">Enums</a></p>
+    <ul class="menu-root">
+      
+      
+      <li>
+        <a href="/enum/__directivelocation/" class="sidebar-link">
+          __DirectiveLocation
+        </a>
+      </li>
+      
+      
+      <li>
+        <a href="/enum/__typekind/" class="sidebar-link">
+          __TypeKind
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+
+  
+
+  <li>
+    <p><a href="/input_object">Input Objects</a></p>
+    <ul class="menu-root">
+      
+      
+      <li>
+        <a href="/input_object/cardfilter/" class="sidebar-link">
+          CardFilter
+        </a>
+      </li>
+      
+      
+      <li>
+        <a href="/input_object/magicsetfilter/" class="sidebar-link">
+          MagicSetFilter
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+
+  <li>
+    <p><a href="/scalar">Scalars</a></p>
+    <ul class="menu-root">
+      
+      
+      <li>
+        <a href="/scalar/boolean/" class="sidebar-link">
+          Boolean
+        </a>
+      </li>
+      
+      
+      <li>
+        <a href="/scalar/float/" class="sidebar-link">
+          Float
+        </a>
+      </li>
+      
+      
+      <li>
+        <a href="/scalar/id/" class="sidebar-link">
+          ID
+        </a>
+      </li>
+      
+      
+      <li>
+        <a href="/scalar/int/" class="sidebar-link">
+          Int
+        </a>
+      </li>
+      
+      
+      <li>
+        <a href="/scalar/string/" class="sidebar-link">
+          String
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      <div id="content">
+
+        <h1>
+<a id="__typekind" class="anchor" href="#__typekind" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>__TypeKind</h1>
+<p>An enum describing what kind of type a given <code>__Type</code> is.</p>
+<h3 id="fields">
+<a id="values" class="anchor" href="#values" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Values</h3>
+  <h4 id="scalar" class="name">
+<a id="scalar" class="anchor" href="#scalar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SCALAR</h4>
+  <div class="description-wrapper">
+   <p>Indicates this type is a scalar.</p>
+  </div>
+  <h4 id="object" class="name">
+<a id="object" class="anchor" href="#object" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>OBJECT</h4>
+  <div class="description-wrapper">
+   <p>Indicates this type is an object. `fields` and `interfaces` are valid fields.</p>
+  </div>
+  <h4 id="interface" class="name">
+<a id="interface" class="anchor" href="#interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>INTERFACE</h4>
+  <div class="description-wrapper">
+   <p>Indicates this type is an interface. `fields` and `possibleTypes` are valid fields.</p>
+  </div>
+  <h4 id="union" class="name">
+<a id="union" class="anchor" href="#union" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UNION</h4>
+  <div class="description-wrapper">
+   <p>Indicates this type is a union. `possibleTypes` is a valid field.</p>
+  </div>
+  <h4 id="enum" class="name">
+<a id="enum" class="anchor" href="#enum" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ENUM</h4>
+  <div class="description-wrapper">
+   <p>Indicates this type is an enum. `enumValues` is a valid field.</p>
+  </div>
+  <h4 id="input_object" class="name">
+<a id="input_object" class="anchor" href="#input_object" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>INPUT_OBJECT</h4>
+  <div class="description-wrapper">
+   <p>Indicates this type is an input object. `inputFields` is a valid field.</p>
+  </div>
+  <h4 id="list" class="name">
+<a id="list" class="anchor" href="#list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LIST</h4>
+  <div class="description-wrapper">
+   <p>Indicates this type is a list. `ofType` is a valid field.</p>
+  </div>
+  <h4 id="non_null" class="name">
+<a id="non_null" class="anchor" href="#non_null" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NON_NULL</h4>
+  <div class="description-wrapper">
+   <p>Indicates this type is a non-null. `ofType` is a valid field.</p>
+  </div>
+
+      </div>
+
+      <!-- mobile only -->
+      <div id="mobile-header">
+        <a class="menu-button"></a>
+        <a class="logo" href="/">
+
+        </a>
+      </div>
+      <div id="mobile-shade"></div>
+
+    </div>
+
+  </body>
+</html>

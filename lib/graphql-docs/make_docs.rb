@@ -8,9 +8,8 @@ path = "./lib/graphql-docs"
 
 GraphQLDocs.build(
   filename: "./lib/graphql-docs/schema.idl",
-  delete_output: true,
-  output_dir: "./public/docs/",
-  base_url: "/docs",
+  output_dir: "./public/",
+  base_url: "",
   templates: {
     default: "#{path}/layouts/default.html",
     includes: "#{path}/layouts/includes",

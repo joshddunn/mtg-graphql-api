@@ -14,6 +14,9 @@ card_keys = []
 blocks = []
 card_descriptions = []
 
+current = 1
+total = data_hash.count
+
 data_hash.each do |key, value|
   value.each do |set_key, set_value|
     set_keys.push set_key unless set_keys.include? set_key
@@ -171,8 +174,8 @@ data_hash.each do |key, value|
   end
 
   # cards
-  value[:cards].each do |card|
-    info = Card.create(
+  information = value[:cards].map do |card|
+    Card.new(
       identifier: card[:id],
       magic_set_id: set.id,
       artist_id: Artist.where(identifier: card[:artist]).first.id,
@@ -200,74 +203,104 @@ data_hash.each do |key, value|
       timeshifted: card[:timeshifted] ? true : false, 
       starter: card[:starter] ? true : false
     )
+  end
+  Card.import information, validate: false
 
+  information = []
+  value[:cards].each do |card|
     # color identity assoc
     if card[:colorIdentity].present?
+      info = Card.find_by(identifier: card[:id])
       card[:colorIdentity].each do |color_identity|
-        ColorIdentityAssociation.new(
+        information.push ColorIdentityAssociation.new(
           card_id: info.id,
           color_identity_id: ColorIdentity.where(identifier: color_identity).first.id
-        ).save!
+        )
       end
     end
+  end
+  ColorIdentityAssociation.import information, validate: false
 
+  information = []
+  value[:cards].each do |card|
     # color assoc
     if card[:colors].present?
+      info = Card.find_by(identifier: card[:id])
       card[:colors].each do |color|
-        ColorAssociation.new(
+        information.push ColorAssociation.new(
           card_id: info.id,
           color_id: Color.where(identifier: color).first.id
-        ).save!
+        )
       end
     end
+  end
+  ColorAssociation.import information, validate: false
 
+  information = []
+  value[:cards].each do |card|
     # subtype assoc
     if card[:subtypes].present?
+      info = Card.find_by(identifier: card[:id])
       card[:subtypes].each do |subtype|
-        SubtypeAssociation.new(
+        information.push SubtypeAssociation.new(
           card_id: info.id,
           subtype_id: Subtype.where(identifier: subtype).first.id
-        ).save!
+        )
       end
     end
+  end
+  SubtypeAssociation.import information, validate: false
 
+  information = []
+  value[:cards].each do |card|
     # supertype assoc
     if card[:supertypes].present?
+      info = Card.find_by(identifier: card[:id])
       card[:supertypes].each do |supertype|
-        SupertypeAssociation.new(
+        information.push SupertypeAssociation.new(
           card_id: info.id,
           supertype_id: Supertype.where(identifier: supertype).first.id
-        ).save!
+        )
       end
     end
+  end
+  SupertypeAssociation.import information, validate: false
 
+  information = []
+  value[:cards].each do |card|
     # type assoc
     if card[:types].present?
+      info = Card.find_by(identifier: card[:id])
       card[:types].each do |type|
-        TypeAssociation.new(
+        information.push TypeAssociation.new(
           card_id: info.id,
           type_id: Type.where(identifier: type).first.id
-        ).save!
+        )
       end
     end
-
   end
+  TypeAssociation.import information, validate: false
+
+  puts "#{key} (#{current} of #{total})"
+  current += 1
 end
 
 puts "Phase 2 seeding is complete"
 
 data_hash.each do |key, value|
+  information = []
   value[:cards].each do |card|
     # variation assoc
     if card[:variations].present?
       card[:variations].each do |variation|
-        Variation.new(
+        information.push Variation.new(
           card_id: Card.where(identifier: card[:id]).first.id,
           variation_id: Card.where(multiverseid: variation).first.id
-        ).save!
+        )
       end
     end
   end
+  Variation.import information, validate: false
 end
 
 puts "Phase 3 seeding is complete"

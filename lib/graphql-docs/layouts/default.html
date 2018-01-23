@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="<%= name %> GraphQL documentation">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title><%= title || name %></title>
+    <title>MTGQL | <%= (title || name).capitalize %></title>
     <link rel="stylesheet" href="<%= base_url %>/assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
     <script>
@@ -17,7 +17,12 @@
         icon: '¶'
       };
       anchors.add('h3');
+
+      document.getElementById("menu-button").addEventListener("click", function() {
+        document.getElementsByTagName("body")[0].classList.toggle("sidebar-open");
+      });
     });
+
 
     </script>
   </head>
@@ -37,7 +42,7 @@
 
       <!-- mobile only -->
       <div id="mobile-header">
-        <a class="menu-button"></a>
+        <a id="menu-button" class="menu-button"></a>
         <a class="logo" href="<%= base_url.present? ? base_url : '/' %>">
 
         </a>
