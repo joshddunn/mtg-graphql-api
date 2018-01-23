@@ -28,3 +28,7 @@ This API contains data that is Copyright © Wizards of the Coast - All Rights Re
 MTGQL is not affiliated with MTG JSON or Wizards of the Coast in any way.
 
 MTGQL was built by [Josh Dunn](https://joshddunn.com).
+
+## PokeQL
+
+If you like the pokemon video games, check out [pokeql.com](http://pokeql.com).
