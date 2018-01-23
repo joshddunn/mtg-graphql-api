@@ -2,6 +2,7 @@ require 'search_object/plugin/graphql'
 
 class Resolvers::CardSearch
   include SearchObject.module(:graphql)
+  description "Paginated card information"
 
   scope { Card.all }
 
@@ -18,8 +19,8 @@ class Resolvers::CardSearch
     argument :supertype, types.String
   end
 
-  option :filter, type: CardFilter, with: :apply_filter
-  option :order, type: types[types.String], with: :apply_order
+  option :filter, type: CardFilter, with: :apply_filter, description: "Returns the elements that satisfy the filter arguments."
+  option :order, type: types[types.String], with: :apply_order, description: "Returns the elements ordered by the specified field."
 
   def apply_filter(scope, value)
     branches = normalize_filters(value).reduce { |a,b| a.or(b) }

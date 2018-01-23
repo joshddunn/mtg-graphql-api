@@ -139,6 +139,8 @@ type CardConnection {
 
   # Information to aid in pagination.
   pageInfo: PageInfo!
+
+  # Total number of nodes in the query.
   totalCount: Int
 }
 
@@ -248,6 +250,8 @@ type MagicSetConnection {
 
   # Information to aid in pagination.
   pageInfo: PageInfo!
+
+  # Total number of nodes in the query.
   totalCount: Int
 }
 
@@ -283,12 +287,16 @@ type PageInfo {
 type Query {
   # Card type information.
   CardTypes: [Type]
+
+  # Paginated card information
   Cards(
     # Returns the elements in the list that come after the specified global ID.
     after: String
 
     # Returns the elements in the list that come before the specified global ID.
     before: String
+
+    # Returns the elements that satisfy the filter arguments.
     filter: CardFilter
 
     # Returns the first _n_ elements from the list.
@@ -296,6 +304,8 @@ type Query {
 
     # Returns the last _n_ elements from the list.
     last: Int
+
+    # Returns the elements ordered by the specified field.
     order: [String]
   ): CardConnection
 
@@ -310,6 +320,8 @@ type Query {
 
     # Returns the elements in the list that come before the specified global ID.
     before: String
+
+    # Returns the elements that satisfy the filter arguments.
     filter: MagicSetFilter
 
     # Returns the first _n_ elements from the list.
@@ -317,6 +329,8 @@ type Query {
 
     # Returns the last _n_ elements from the list.
     last: Int
+
+    # Returns the elements ordered by the specified field.
     order: [String]
   ): MagicSetConnection
 
