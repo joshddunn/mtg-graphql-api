@@ -1,6 +1,6 @@
 Types::CardConnectionType = Types::CardType.define_connection do
   name "CardConnection"
-  description "Card information."
+  description "Returns paginated card information."
 
   field :totalCount do
     type types.Int

@@ -18,10 +18,8 @@
       };
       anchors.add('h3');
 
-      document.getElementById("mobile-header").addEventListener("click", function() {
-        var body = document.getElementsByTagName("body")[0];
-
-        body.classList.toggle("sidebar-open");
+      document.getElementById("menu-button").addEventListener("click", function() {
+        document.getElementsByTagName("body")[0].classList.toggle("sidebar-open");
       });
     });
 
@@ -332,12 +330,13 @@
 
         <h1>
 <a id="artist" class="anchor" href="#artist" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Artist</h1>
+<p>Artist Information.</p>
 <h2>
 <a id="connections" class="anchor" href="#connections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Connections</h2>
 <div class="field-entry ">
   <span id="cards" class="field-name connection-name">cards (<a href="/object/cardconnection"><code>CardConnection</code></a>)</span>
   <div class="description-wrapper">
-  <p></p>
+  <p>Returns a list of cards that the artist has illustrated.</p>
      <table class="arguments">
   <thead>
   <tr>
@@ -396,6 +395,7 @@
 <div class="field-entry ">
   <span id="identifier" class="field-name">identifier (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Artist name</p>
   </div>
 </div>
 
@@ -403,7 +403,7 @@
 
       <!-- mobile only -->
       <div id="mobile-header">
-        <a class="menu-button"></a>
+        <a id="menu-button" class="menu-button"></a>
         <a class="logo" href="/">
 
         </a>

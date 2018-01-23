@@ -18,10 +18,8 @@
       };
       anchors.add('h3');
 
-      document.getElementById("mobile-header").addEventListener("click", function() {
-        var body = document.getElementsByTagName("body")[0];
-
-        body.classList.toggle("sidebar-open");
+      document.getElementById("menu-button").addEventListener("click", function() {
+        document.getElementsByTagName("body")[0].classList.toggle("sidebar-open");
       });
     });
 
@@ -332,16 +330,19 @@
 
         <h1>
 <a id="booster" class="anchor" href="#booster" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Booster</h1>
+<p>Booster Information.</p>
 <h2>
 <a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
 <div class="field-entry ">
   <span id="carddescription" class="field-name">cardDescription (<code><a href="/object/carddescription">CardDescription</a></code>)</span>
   <div class="description-wrapper">
+  <p>Describes the card rarity / classification.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="position" class="field-name">position (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
+  <p>The position the card can be found in the pack.</p>
   </div>
 </div>
 
@@ -349,7 +350,7 @@
 
       <!-- mobile only -->
       <div id="mobile-header">
-        <a class="menu-button"></a>
+        <a id="menu-button" class="menu-button"></a>
         <a class="logo" href="/">
 
         </a>

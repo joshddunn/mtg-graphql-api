@@ -1,6 +1,6 @@
 Types::ColorIdentityType = GraphQL::ObjectType.define do
   name "ColorIdentity"
-  description ""
+  description "Card color identity information."
 
   # field :id, !types.ID, "", property: :id
   field :identifier, types.String, "Name of card color identities. E.g., U, B, etc.", property: :identifier

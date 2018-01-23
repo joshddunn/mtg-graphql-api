@@ -18,10 +18,8 @@
       };
       anchors.add('h3');
 
-      document.getElementById("mobile-header").addEventListener("click", function() {
-        var body = document.getElementsByTagName("body")[0];
-
-        body.classList.toggle("sidebar-open");
+      document.getElementById("menu-button").addEventListener("click", function() {
+        document.getElementsByTagName("body")[0].classList.toggle("sidebar-open");
       });
     });
 
@@ -332,41 +330,49 @@
 
         <h1>
 <a id="card" class="anchor" href="#card" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Card</h1>
+<p>Card information.</p>
 <h2>
 <a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
 <div class="field-entry ">
   <span id="artist" class="field-name">artist (<code><a href="/object/artist">Artist</a></code>)</span>
   <div class="description-wrapper">
+  <p>Artist information.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="border" class="field-name">border (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>The border of the card. Return values are null, black, silver, white</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="cardtype" class="field-name">cardType (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>The full card type as written. Includes subtype, supertype, and type.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="cmc" class="field-name">cmc (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
+  <p>Converted mana cost</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="coloridentities" class="field-name">colorIdentities (<code><a href="/object/coloridentity">[ColorIdentity]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of the card's color identities.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="colors" class="field-name">colors (<code><a href="/object/color">[Color]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of the card's colors.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="flavor" class="field-name">flavor (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Flavor text for the card.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -402,6 +408,7 @@
 <div class="field-entry ">
   <span id="magicset" class="field-name">magicSet (<code><a href="/object/magicset">MagicSet</a></code>)</span>
   <div class="description-wrapper">
+  <p>The Magic set this card belongs to.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -422,11 +429,13 @@
 <div class="field-entry ">
   <span id="name" class="field-name">name (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>The name of the card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="number" class="field-name">number (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>The number of the card within a set.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -442,11 +451,13 @@
 <div class="field-entry ">
   <span id="releasedate" class="field-name">releaseDate (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Doesn't exist for all cards. Use Magic Set release date as a fallback.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="reserved" class="field-name">reserved (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns whether the card is on the reserved list.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -457,21 +468,25 @@
 <div class="field-entry ">
   <span id="subtypes" class="field-name">subtypes (<code><a href="/object/subtype">[Subtype]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of the card's subtypes.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="supertypes" class="field-name">supertypes (<code><a href="/object/supertype">[Supertype]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of the card's supertypes.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="text" class="field-name">text (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Card rules text.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="timeshifted" class="field-name">timeshifted (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns whether the card is timeshifted.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -482,11 +497,13 @@
 <div class="field-entry ">
   <span id="types" class="field-name">types (<code><a href="/object/type">[Type]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of the card's types.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="variants" class="field-name">variants (<code><a href="/object/card">[Card]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of card variants.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -499,7 +516,7 @@
 
       <!-- mobile only -->
       <div id="mobile-header">
-        <a class="menu-button"></a>
+        <a id="menu-button" class="menu-button"></a>
         <a class="logo" href="/">
 
         </a>

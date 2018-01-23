@@ -18,10 +18,8 @@
       };
       anchors.add('h3');
 
-      document.getElementById("mobile-header").addEventListener("click", function() {
-        var body = document.getElementsByTagName("body")[0];
-
-        body.classList.toggle("sidebar-open");
+      document.getElementById("menu-button").addEventListener("click", function() {
+        document.getElementsByTagName("body")[0].classList.toggle("sidebar-open");
       });
     });
 
@@ -337,7 +335,7 @@
 <div class="field-entry ">
   <span id="cards" class="field-name connection-name">cards (<a href="/object/cardconnection"><code>CardConnection</code></a>)</span>
   <div class="description-wrapper">
-  <p></p>
+  <p>Returns paginated card information.</p>
      <table class="arguments">
   <thead>
   <tr>
@@ -396,21 +394,25 @@
 <div class="field-entry ">
   <span id="alternativenames" class="field-name">alternativeNames (<code><a href="/object/alternativename">[AlternativeName]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of alternative names for the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="block" class="field-name">block (<code><a href="/object/block">Block</a></code>)</span>
   <div class="description-wrapper">
+  <p>A magic set's block information.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="boosters" class="field-name">boosters (<code><a href="/object/booster">[Booster]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Booster information.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="border" class="field-name">border (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Border type of cards in the set. Returns either nil, silver, black, or white.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -431,15 +433,16 @@
 <div class="field-entry ">
   <span id="magicraritiescodes" class="field-name">magicRaritiesCodes (<code><a href="/object/magicraritiescode">[MagicRaritiesCode]</a></code>)</span>
   <div class="description-wrapper">
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="mkm" class="field-name">mkm (<code><a href="/scalar/int">Int</a></code>)</span>
-  <div class="description-wrapper">
+  <p>Returns a list of magic rarities codes.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="mkmname" class="field-name">mkmName (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="mkm_id" class="field-name">mkm_id (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
   </div>
 </div>
@@ -466,11 +469,13 @@
 <div class="field-entry ">
   <span id="settype" class="field-name">setType (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the type of the set. E.g., starter, commander, core, etc.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="translations" class="field-name">translations (<code><a href="/object/translation">[Translation]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of translations for the name of a magic set.</p>
   </div>
 </div>
 
@@ -478,7 +483,7 @@
 
       <!-- mobile only -->
       <div id="mobile-header">
-        <a class="menu-button"></a>
+        <a id="menu-button" class="menu-button"></a>
         <a class="logo" href="/">
 
         </a>

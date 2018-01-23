@@ -1,6 +1,6 @@
 Types::MagicSetConnectionType = Types::MagicSetType.define_connection do
   name "MagicSetConnection"
-  description ""
+  description "Returns paginated magic set information."
 
   field :totalCount do
     type types.Int
