@@ -1,5 +1,5 @@
 class MtgqlController < ApplicationController
-  def v1
+  def query
     result = MyappSchema.execute params[:query]
     render json: result
   end
