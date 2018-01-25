@@ -1,9 +1,9 @@
 Types::MagicSetConnectionType = Types::MagicSetType.define_connection do
   name "MagicSetConnection"
-  description "Returns paginated magic set information."
+  description "Returns paginated information about magic the gathering sets."
 
   field :totalCount do
-    description "Total number of nodes in the query."
+    description "Returns the total number of nodes found by the query."
 
     type types.Int
 

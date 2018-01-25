@@ -1,9 +1,9 @@
 Types::CardConnectionType = Types::CardType.define_connection do
   name "CardConnection"
-  description "Returns paginated card information."
+  description "Returns paginated information about magic the gathering cards."
 
   field :totalCount do
-    description "Total number of nodes in the query."
+    description "Returns the total number of nodes found by the query."
 
     type types.Int
 

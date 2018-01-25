@@ -1,10 +1,10 @@
 Types::BoosterType = GraphQL::ObjectType.define do
   name "Booster"
-  description "Booster Information."
+  description "Contains information about a booster pack for a magic set."
 
   # field :id, !types.ID, "", property: :id
   # field :magicSet, Types::MagicSetType, "", property: :magic_set
-  field :position, types.Int, "The position the card can be found in the pack.", property: :position
-  field :cardDescription, Types::CardDescriptionType, "Describes the card rarity / classification.", property: :card_description
+  field :position, types.Int, "Returns the slot a card classification can be found in the booster pack.", property: :position
+  field :cardDescription, Types::CardDescriptionType, "Returns descriptive information about a card slot in the booster pack.", property: :card_description
 
 end

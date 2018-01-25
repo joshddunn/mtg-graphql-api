@@ -2,7 +2,7 @@ require 'search_object/plugin/graphql'
 
 class Resolvers::CardSearch
   include SearchObject.module(:graphql)
-  description "Paginated card information"
+  description "Returns paginated information about magic cards."
 
   scope { Card.all }
 
@@ -11,16 +11,16 @@ class Resolvers::CardSearch
   CardFilter = GraphQL::InputObjectType.define do
     name 'CardFilter'
 
-    argument :OR, -> { types[CardFilter] }
+    argument :OR, -> { types[CardFilter] }, description: "Allows you to chain multiple card filters." 
 
-    argument :name, types.String
-    argument :type, types.String
-    argument :subtype, types.String
-    argument :supertype, types.String
+    argument :name, types.String, description: "Allows you to search for a magic card by name." 
+    argument :type, types.String, description: "Allows you to search for a magic card by type."
+    argument :subtype, types.String, description: "Allows you to search for a magic card by subtype."
+    argument :supertype, types.String, description: "Allows you to search for a magic card by supertype."
   end
 
-  option :filter, type: CardFilter, with: :apply_filter, description: "Returns the elements that satisfy the filter arguments."
-  option :order, type: types[types.String], with: :apply_order, description: "Returns the elements ordered by the specified field."
+  option :filter, type: CardFilter, with: :apply_filter, description: "Returns nodes that satisfy the filter arguments."
+  option :order, type: types[types.String], with: :apply_order, description: "Returns nodes ordered by the specified field."
 
   def apply_filter(scope, value)
     branches = normalize_filters(value).reduce { |a,b| a.or(b) }

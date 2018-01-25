@@ -1,15 +1,15 @@
-# Alternative name for a magic set.
+# Contains information about an alternative name for a magic set.
 type AlternativeName {
-  # The alternative name
+  # Returns the alternative name of a magic set.
   identifier: String
 
-  # Returns a list of magic sets that the alternative name belongs to.
+  # Returns an array of magic sets that the alternative name references.
   magicSet: MagicSet
 }
 
-# Artist Information.
+# Contains information about an artist that illustrated a magic card.
 type Artist {
-  # Returns a list of cards that the artist has illustrated.
+  # Returns an array of cards that the artist has illustrated.
   cards(
     # Returns the elements in the list that come after the specified global ID.
     after: String
@@ -24,13 +24,13 @@ type Artist {
     last: Int
   ): CardConnection
 
-  # Artist name
+  # Returns the name of an artist.
   identifier: String
 }
 
-# Block Information.
+# Contains informaiton about a magic set block.
 type Block {
-  # The name of the block. E.g., Zendikar, Mirrodin, etc.
+  # Returns the name of the block. E.g., Zendikar, Mirrodin, etc.
   identifier: String
 
   # Returns a list of sets that are in this block. E.g., If the block is Zendikar,
@@ -38,101 +38,117 @@ type Block {
   magicSets: [MagicSet]
 }
 
-# Booster Information.
+# Contains information about a booster pack for a magic set.
 type Booster {
-  # Describes the card rarity / classification.
+  # Returns descriptive information about a card slot in the booster pack.
   cardDescription: CardDescription
 
-  # The position the card can be found in the pack.
+  # Returns the slot a card classification can be found in the booster pack.
   position: Int
 }
 
-# Card information.
+# Contains information about magic cards.
 type Card {
-  # Artist information.
+  # Returns information about the artist who illustrated the card.
   artist: Artist
 
-  # The border of the card. Return values are null, black, silver, white
+  # Returns the border color of the magic card. This field will return null, black, silver, or white.
   border: String
 
-  # The full card type as written. Includes subtype, supertype, and type.
+  # Returns the card type as printed on the magic card. The card type includes the
+  # subtype, supertype, and type of the magic card.
   cardType: String
 
-  # Converted mana cost
+  # Returns the converted mana cost of the magic card.
   cmc: Int
 
-  # Returns a list of the card's color identities.
+  # Returns a list of color identities for the magic card.
   colorIdentities: [ColorIdentity]
 
-  # Returns a list of the card's colors.
+  # Returns a list of colors for the magic card.
   colors: [Color]
 
-  # Flavor text for the card.
+  # Returns the flavour text printed on the magic card.
   flavor: String
 
+  # Returns the maximum hand size modifier. This field returns null, except for Vanguard cards.
   hand: Int
 
+  # Returns the id of the magic card. The id is a 40 character alphanumeric string.
   id: String
 
+  # Returns the image name of the magic card. This field is the name in lowercase.
   imageName: String
 
+  # Returns the layout of the magic card. 
   layout: Int
 
+  # Returns the starting life total modifier. This field returns null, except for Vanguard cards.
   life: Int
 
+  # Returns the loyalty value of the magic card.
   loyalty: Int
 
-  # The Magic set this card belongs to.
+  # Returns information about the magic set this card is included in.
   magicSet: MagicSet
 
+  # Returns the mana cost of the magic card.
   manaCost: String
 
+  # Returns the MCI number of the magic card.
   mciNumber: String
 
+  # Returns the multiverseid of the magic card.
   multiverseid: Int
 
-  # The name of the card.
+  # Returns the name as printed on the magic card.
   name: String
 
-  # The number of the card within a set.
+  # Returns the set number of the magic card.
   number: String
 
+  # Returns the power of the magic card.
   power: String
 
+  # Returns the rarity of the magic card.
   rarity: String
 
-  # Doesn't exist for all cards. Use Magic Set release date as a fallback.
+  # Returns the release date of the magic card. If this field is null, you should
+  # use the Magic Set release date as a fallback.
   releaseDate: String
 
   # Returns whether the card is on the reserved list.
   reserved: Boolean
 
+  # Returns whether the magic card was released in a core box set.
   starter: Boolean
 
-  # Returns a list of the card's subtypes.
+  # Returns a list of subtypes for the magic card.
   subtypes: [Subtype]
 
-  # Returns a list of the card's supertypes.
+  # Returns a list of supertypes for the magic card.
   supertypes: [Supertype]
 
-  # Card rules text.
+  # Returns the text inside of the rules box on the card.
   text: String
 
-  # Returns whether the card is timeshifted.
+  # Returns whether the magic card is timeshifted.
   timeshifted: Boolean
 
+  # Returns the toughness of the magic card.
   toughness: String
 
-  # Returns a list of the card's types.
+  # Returns a list of types for the magic card.
   types: [Type]
 
-  # Returns a list of card variants.
+  # Returns a list of the variations of the magic card.
   variants: [Card]
 
+  # Returns the watermark on the magic card. If there is no watermark, this field returns null.
   watermark: String
 }
 
-# Returns paginated card information.
+# Returns paginated information about magic the gathering cards.
 type CardConnection {
   # A list of edges.
   edges: [CardEdge]
@@ -140,13 +156,13 @@ type CardConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
 
-  # Total number of nodes in the query.
+  # Returns the total number of nodes found by the query.
   totalCount: Int
 }
 
-# Card Description Type.
+# Contains information about card slots in a booster pack.
 type CardDescription {
-  # The rarity / classification of a card. E.g. Common, Mythic, etc.
+  # Returns the rarity or classification of a card slot in a booster pack. E.g. Common, Mythic, etc.
   identifier: String
 }
 
@@ -160,47 +176,58 @@ type CardEdge {
 }
 
 input CardFilter {
+  # Allows you to chain multiple card filters.
   OR: [CardFilter]
+
+  # Allows you to search for a magic card by name.
   name: String
+
+  # Allows you to search for a magic card by subtype.
   subtype: String
+
+  # Allows you to search for a magic card by supertype.
   supertype: String
+
+  # Allows you to search for a magic card by type.
   type: String
 }
 
-# Card color information.
+# Returns information about magic card colors.
 type Color {
-  # Name of card colors. E.g., Blue, Black, White, etc.
+  # Returns the full name of magic card colors. This field returns Blue, Black, White, Green, or Red.
   identifier: String
 }
 
-# Card color identity information.
+# Contains information about magic card color identities.
 type ColorIdentity {
-  # Name of card color identities. E.g., U, B, etc.
+  # Returns the letter representing a color identity. This field returns either U, B, R, G, or W.
   identifier: String
 }
 
-# Magic rarity code information. Only appears in older magic sets.
+# Contains information about the magic rarity code for a magic set. Only appears in older magic sets.
 type MagicRaritiesCode {
-  # Magic rarities code.
+  # Returns the string represeting the magic rarity code.
   identifier: String
 
+  # Returns information about the magic set that has the rarity code.
   magicSet: MagicSet
 }
 
+# Contains information about a magic the gathering set.
 type MagicSet {
   # Returns a list of alternative names for the magic set.
   alternativeNames: [AlternativeName]
 
-  # A magic set's block information.
+  # Returns information about the block the magic set is a part of.
   block: Block
 
-  # Booster information.
-  boosters: [Booster]
+  # Returns the structure of a booster pack in this magic set.
+  booster: [Booster]
 
-  # Border type of cards in the set. Returns either nil, silver, black, or white.
+  # Returns the border color of magic cards in the set. This field returns either null, silver, black, or white.
   border: String
 
-  # Returns paginated card information.
+  # Returns paginated information about the cards in the magic set.
   cards(
     # Returns the elements in the list that come after the specified global ID.
     after: String
@@ -215,35 +242,44 @@ type MagicSet {
     last: Int
   ): CardConnection
 
+  # Returns the code of the magic set.
   code: String
 
+  # Returns the gatherer code of the magic set.
   gathererCode: String
 
+  # Returns the magic cards info code of the magic set.
   magicCardsInfoCode: String
 
-  # Returns a list of magic rarities codes.
+  # Returns a list of magic rarity codes for the magic set.
   magicRaritiesCodes: [MagicRaritiesCode]
 
+  # Returns the MKM name of the magic set.
   mkmName: String
 
+  # Returns the MKM id of the magic set.
   mkm_id: Int
 
+  # Returns the name of the magic set.
   name: String
 
+  # Returns the old code of the magic set.
   oldCode: String
 
+  # Returns whether the magic set was only released online.
   onlineOnly: Boolean
 
+  # Returns the release date of the magic set.
   releaseDate: String
 
-  # Returns the type of the set. E.g., starter, commander, core, etc.
+  # Returns the type of the magic set. E.g., starter, commander, core, etc.
   setType: String
 
-  # Returns a list of translations for the name of a magic set.
+  # Returns a list of translations for the name of the magic set.
   translations: [Translation]
 }
 
-# Returns paginated magic set information.
+# Returns paginated information about magic the gathering sets.
 type MagicSetConnection {
   # A list of edges.
   edges: [MagicSetEdge]
@@ -251,7 +287,7 @@ type MagicSetConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
 
-  # Total number of nodes in the query.
+  # Returns the total number of nodes found by the query.
   totalCount: Int
 }
 
@@ -265,7 +301,10 @@ type MagicSetEdge {
 }
 
 input MagicSetFilter {
+  # Allows you to chain multiple card filters.
   OR: [MagicSetFilter]
+
+  # Allows you to search for a magic set by name.
   name: String
 }
 
@@ -285,10 +324,10 @@ type PageInfo {
 }
 
 type Query {
-  # Card type information.
+  # Returns structured information about magic card types.
   CardTypes: [Type]
 
-  # Paginated card information
+  # Returns paginated information about magic cards.
   Cards(
     # Returns the elements in the list that come after the specified global ID.
     after: String
@@ -296,7 +335,7 @@ type Query {
     # Returns the elements in the list that come before the specified global ID.
     before: String
 
-    # Returns the elements that satisfy the filter arguments.
+    # Returns nodes that satisfy the filter arguments.
     filter: CardFilter
 
     # Returns the first _n_ elements from the list.
@@ -305,15 +344,17 @@ type Query {
     # Returns the last _n_ elements from the list.
     last: Int
 
-    # Returns the elements ordered by the specified field.
+    # Returns nodes ordered by the specified field.
     order: [String]
   ): CardConnection
 
-  # Color identity information.
+  # Returns structured information about magic card color identities.
   ColorIdentities: [ColorIdentity]
 
-  # Color information.
+  # Returns structured information about magic card colors.
   Colors: [Color]
+
+  # Returns paginated information about magic sets.
   MagicSets(
     # Returns the elements in the list that come after the specified global ID.
     after: String
@@ -321,7 +362,7 @@ type Query {
     # Returns the elements in the list that come before the specified global ID.
     before: String
 
-    # Returns the elements that satisfy the filter arguments.
+    # Returns nodes that satisfy the filter arguments.
     filter: MagicSetFilter
 
     # Returns the first _n_ elements from the list.
@@ -330,36 +371,43 @@ type Query {
     # Returns the last _n_ elements from the list.
     last: Int
 
-    # Returns the elements ordered by the specified field.
+    # Returns nodes ordered by the specified field.
     order: [String]
   ): MagicSetConnection
 
-  # Card subtype information.
+  # Returns structured information about magic card subtypes.
   Subtypes: [Subtype]
 
-  # Card supertype information.
+  # Returns structured information about magic card supertypes.
   Supertypes: [Supertype]
 }
 
+# Contains information about magic card subtypes.
 type Subtype {
-  # Name of card subtype. E.g., Merfolk, Wizard, etc.
+  # Returns the name of the subtype. E.g., Merfolk, Wizard, etc.
   identifier: String
 }
 
+# Contains information about magic card supertypes.
 type Supertype {
-  # Name of card supertype. E.g., Basic, Legendary, etc.
+  # Returns the name of the supertype. E.g., Basic, Legendary, etc.
   identifier: String
 }
 
+# Contains information about the translated name of a magic set.
 type Translation {
+  # Returns the language code of the translation.
   code: String
 
+  # Returns the translated name of a magic set.
   identifier: String
 
+  # Returns information about the associated magic set.
   magicSet: MagicSet
 }
 
+# Contains information about the type of a magic card.
 type Type {
-  # Name of card type. E.g., Instant, Land, Enchantment etc.
+  # Returns the name of the card type. E.g., Instant, Land, Enchantment etc.
   identifier: String
 }

@@ -330,128 +330,141 @@
 
         <h1>
 <a id="card" class="anchor" href="#card" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Card</h1>
-<p>Card information.</p>
+<p>Contains information about magic cards.</p>
 <h2>
 <a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
 <div class="field-entry ">
   <span id="artist" class="field-name">artist (<code><a href="/object/artist">Artist</a></code>)</span>
   <div class="description-wrapper">
-  <p>Artist information.</p>
+  <p>Returns information about the artist who illustrated the card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="border" class="field-name">border (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>The border of the card. Return values are null, black, silver, white</p>
+  <p>Returns the border color of the magic card. This field will return null, black, silver, or white.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="cardtype" class="field-name">cardType (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>The full card type as written. Includes subtype, supertype, and type.</p>
+  <p>Returns the card type as printed on the magic card. The card type includes the
+subtype, supertype, and type of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="cmc" class="field-name">cmc (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
-  <p>Converted mana cost</p>
+  <p>Returns the converted mana cost of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="coloridentities" class="field-name">colorIdentities (<code><a href="/object/coloridentity">[ColorIdentity]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of the card's color identities.</p>
+  <p>Returns a list of color identities for the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="colors" class="field-name">colors (<code><a href="/object/color">[Color]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of the card's colors.</p>
+  <p>Returns a list of colors for the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="flavor" class="field-name">flavor (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Flavor text for the card.</p>
+  <p>Returns the flavour text printed on the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="hand" class="field-name">hand (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the maximum hand size modifier. This field returns null, except for Vanguard cards.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="id" class="field-name">id (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the id of the magic card. The id is a 40 character alphanumeric string.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="imagename" class="field-name">imageName (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the image name of the magic card. This field is the name in lowercase.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="layout" class="field-name">layout (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the layout of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="life" class="field-name">life (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the starting life total modifier. This field returns null, except for Vanguard cards.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="loyalty" class="field-name">loyalty (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the loyalty value of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="magicset" class="field-name">magicSet (<code><a href="/object/magicset">MagicSet</a></code>)</span>
   <div class="description-wrapper">
-  <p>The Magic set this card belongs to.</p>
+  <p>Returns information about the magic set this card is included in.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="manacost" class="field-name">manaCost (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the mana cost of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="mcinumber" class="field-name">mciNumber (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the MCI number of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="multiverseid" class="field-name">multiverseid (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the multiverseid of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="name" class="field-name">name (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>The name of the card.</p>
+  <p>Returns the name as printed on the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="number" class="field-name">number (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>The number of the card within a set.</p>
+  <p>Returns the set number of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="power" class="field-name">power (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the power of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="rarity" class="field-name">rarity (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the rarity of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="releasedate" class="field-name">releaseDate (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Doesn't exist for all cards. Use Magic Set release date as a fallback.</p>
+  <p>Returns the release date of the magic card. If this field is null, you should
+use the Magic Set release date as a fallback.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -463,52 +476,55 @@
 <div class="field-entry ">
   <span id="starter" class="field-name">starter (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns whether the magic card was released in a core box set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="subtypes" class="field-name">subtypes (<code><a href="/object/subtype">[Subtype]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of the card's subtypes.</p>
+  <p>Returns a list of subtypes for the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="supertypes" class="field-name">supertypes (<code><a href="/object/supertype">[Supertype]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of the card's supertypes.</p>
+  <p>Returns a list of supertypes for the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="text" class="field-name">text (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Card rules text.</p>
+  <p>Returns the text inside of the rules box on the card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="timeshifted" class="field-name">timeshifted (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns whether the card is timeshifted.</p>
+  <p>Returns whether the magic card is timeshifted.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="toughness" class="field-name">toughness (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the toughness of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="types" class="field-name">types (<code><a href="/object/type">[Type]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of the card's types.</p>
+  <p>Returns a list of types for the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="variants" class="field-name">variants (<code><a href="/object/card">[Card]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of card variants.</p>
+  <p>Returns a list of the variations of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="watermark" class="field-name">watermark (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the watermark on the magic card. If there is no watermark, this field returns null.</p>
   </div>
 </div>
 

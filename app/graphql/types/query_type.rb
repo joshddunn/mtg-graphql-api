@@ -5,35 +5,35 @@ Types::QueryType = GraphQL::ObjectType.define do
   connection :MagicSets, function: Resolvers::MagicSetSearch, max_page_size: 3
 
   field :CardTypes, types[Types::TypeType] do
-    description "Card type information."
+    description "Returns structured information about magic card types."
     resolve -> (obj, args, ctx) {
       Type.all
     }
   end
 
   field :Subtypes, types[Types::SubtypeType] do
-    description "Card subtype information."
+    description "Returns structured information about magic card subtypes."
     resolve -> (obj, args, ctx) {
       Subtype.all
     }
   end
 
   field :Supertypes, types[Types::SupertypeType] do
-    description "Card supertype information."
+    description "Returns structured information about magic card supertypes."
     resolve -> (obj, args, ctx) {
       Supertype.all
     }
   end
 
   field :Colors, types[Types::ColorType] do
-    description "Color information."
+    description "Returns structured information about magic card colors."
     resolve -> (obj, args, ctx) {
       Color.all
     }
   end
 
   field :ColorIdentities, types[Types::ColorIdentityType] do
-    description "Color identity information."
+    description "Returns structured information about magic card color identities."
     resolve -> (obj, args, ctx) {
       ColorIdentity.all
     }

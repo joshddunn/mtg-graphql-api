@@ -330,12 +330,13 @@
 
         <h1>
 <a id="magicset" class="anchor" href="#magicset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MagicSet</h1>
+<p>Contains information about a magic the gathering set.</p>
 <h2>
 <a id="connections" class="anchor" href="#connections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Connections</h2>
 <div class="field-entry ">
   <span id="cards" class="field-name connection-name">cards (<a href="/object/cardconnection"><code>CardConnection</code></a>)</span>
   <div class="description-wrapper">
-  <p>Returns paginated card information.</p>
+  <p>Returns paginated information about the cards in the magic set.</p>
      <table class="arguments">
   <thead>
   <tr>
@@ -400,82 +401,91 @@
 <div class="field-entry ">
   <span id="block" class="field-name">block (<code><a href="/object/block">Block</a></code>)</span>
   <div class="description-wrapper">
-  <p>A magic set's block information.</p>
+  <p>Returns information about the block the magic set is a part of.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="boosters" class="field-name">boosters (<code><a href="/object/booster">[Booster]</a></code>)</span>
+  <span id="booster" class="field-name">booster (<code><a href="/object/booster">[Booster]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Booster information.</p>
+  <p>Returns the structure of a booster pack in this magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="border" class="field-name">border (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Border type of cards in the set. Returns either nil, silver, black, or white.</p>
+  <p>Returns the border color of magic cards in the set. This field returns either null, silver, black, or white.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="code" class="field-name">code (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the code of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="gatherercode" class="field-name">gathererCode (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the gatherer code of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="magiccardsinfocode" class="field-name">magicCardsInfoCode (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the magic cards info code of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="magicraritiescodes" class="field-name">magicRaritiesCodes (<code><a href="/object/magicraritiescode">[MagicRaritiesCode]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of magic rarities codes.</p>
+  <p>Returns a list of magic rarity codes for the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="mkmname" class="field-name">mkmName (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the MKM name of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="mkm_id" class="field-name">mkm_id (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the MKM id of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="name" class="field-name">name (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the name of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="oldcode" class="field-name">oldCode (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the old code of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="onlineonly" class="field-name">onlineOnly (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns whether the magic set was only released online.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="releasedate" class="field-name">releaseDate (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the release date of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="settype" class="field-name">setType (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns the type of the set. E.g., starter, commander, core, etc.</p>
+  <p>Returns the type of the magic set. E.g., starter, commander, core, etc.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="translations" class="field-name">translations (<code><a href="/object/translation">[Translation]</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of translations for the name of a magic set.</p>
+  <p>Returns a list of translations for the name of the magic set.</p>
   </div>
 </div>
 

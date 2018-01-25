@@ -1,9 +1,9 @@
 Types::SupertypeType = GraphQL::ObjectType.define do
   name "Supertype"
-  description ""
+  description "Contains information about magic card supertypes."
 
   # field :id, types.ID, "", property: :id
-  field :identifier, types.String, "Name of card supertype. E.g., Basic, Legendary, etc.", property: :identifier
+  field :identifier, types.String, "Returns the name of the supertype. E.g., Basic, Legendary, etc.", property: :identifier
 
   # field :cards, types[Types::CardType], "", property: :cards
 end

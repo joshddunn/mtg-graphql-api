@@ -1,9 +1,9 @@
 Types::ColorType = GraphQL::ObjectType.define do
   name "Color"
-  description "Card color information."
+  description "Returns information about magic card colors."
 
   # field :id, !types.ID, "", property: :id
-  field :identifier, types.String, "Name of card colors. E.g., Blue, Black, White, etc.", property: :identifier
+  field :identifier, types.String, "Returns the full name of magic card colors. This field returns Blue, Black, White, Green, or Red.", property: :identifier
 
   # field :cards, types[Types::CardType], "", property: :cards
 end

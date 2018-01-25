@@ -2,6 +2,7 @@ require 'search_object/plugin/graphql'
 
 class Resolvers::MagicSetSearch
   include SearchObject.module(:graphql)
+  description "Returns paginated information about magic sets."
 
   scope { MagicSet.all }
 
@@ -10,13 +11,13 @@ class Resolvers::MagicSetSearch
   MagicSetFilter = GraphQL::InputObjectType.define do
     name 'MagicSetFilter'
 
-    argument :OR, -> { types[MagicSetFilter] }
+    argument :OR, -> { types[MagicSetFilter] }, description: "Allows you to chain multiple card filters."
 
-    argument :name, types.String
+    argument :name, types.String, description: "Allows you to search for a magic set by name."
   end
 
-  option :filter, type: MagicSetFilter, with: :apply_filter, description: "Returns the elements that satisfy the filter arguments."
-  option :order, type: types[types.String], with: :apply_order, description: "Returns the elements ordered by the specified field."
+  option :filter, type: MagicSetFilter, with: :apply_filter, description: "Returns nodes that satisfy the filter arguments."
+  option :order, type: types[types.String], with: :apply_order, description: "Returns nodes ordered by the specified field."
 
   def apply_filter(scope, value)
     branches = normalize_filters(value).reduce { |a,b| a.or(b) }
