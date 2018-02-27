@@ -14,6 +14,7 @@ Requests should be made to
 
 You can test queries [here](http://mtgql.com/graphiql).
 
+Want to contribute? Check out the [source code](https://github.com/joshddunn/mtg-graphql-api).
 
 ## New to GraphQL?
 
