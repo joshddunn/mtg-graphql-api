@@ -1,5 +1,5 @@
-Data sourced from [mtgjson](//mtgjson.com)
+# Magic: The Gathering GraphQL API
 
-remember to precompile assets!
+This project is a graphql API for the Magic: The Gathering.
 
-    ... rails assets:precompile
+The full documentation and API can be found at [MTGQL](http://mtgql.com).
