@@ -10,9 +10,9 @@ This API is in *beta* so endpoints and structure may change without notice.
 
 Requests should be made to
 
-    `http://mtgql.com/v1`
+    `https://mtgql.com/v1`
 
-You can test queries [here](http://mtgql.com/graphiql).
+You can test queries [here](https://mtgql.com/graphiql).
 
 Want to contribute? Check out the [source code](https://github.com/joshddunn/mtg-graphql-api).
 
@@ -32,4 +32,4 @@ MTGQL was built by [Josh Dunn](https://joshddunn.com).
 
 ## PokeQL
 
-If you like the pokemon video games, check out [pokeql.com](http://pokeql.com).
+If you like the pokemon video games, check out [pokeql.com](https://pokeql.com).
