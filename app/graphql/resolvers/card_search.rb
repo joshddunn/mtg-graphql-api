@@ -14,6 +14,7 @@ class Resolvers::CardSearch
     argument :OR, -> { types[CardFilter] }, description: "Allows you to chain multiple card filters." 
 
     argument :name, types.String, description: "Allows you to search for a magic card by name." 
+    argument :nameLike, types.String, description: "Allows you to search for a magic card similar to a name." 
     argument :type, types.String, description: "Allows you to search for a magic card by type."
     argument :subtype, types.String, description: "Allows you to search for a magic card by subtype."
     argument :supertype, types.String, description: "Allows you to search for a magic card by supertype."
@@ -38,6 +39,7 @@ class Resolvers::CardSearch
     scope = Card.all
 
     scope = scope.where(name: value['name']) unless value['name'].nil?
+    scope = scope.where("lower(name) like ?", "#{value['nameLike'].gsub(/\%/,"")}%") unless value['nameLike'].nil?
     scope = scope.includes(:types).where("types.identifier": value['type']) unless value['type'].nil?
     scope = scope.includes(:subtypes).where("subtypes.identifier": value['subtype']) unless value['subtype'].nil?
     scope = scope.includes(:supertypes).where("supertypes.identifier": value['supertype']) unless value['supertype'].nil?
