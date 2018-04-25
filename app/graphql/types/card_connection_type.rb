@@ -8,7 +8,7 @@ Types::CardConnectionType = Types::CardType.define_connection do
     type types.Int
 
     resolve ->(obj, args, ctx) {
-      obj.nodes.count
+      obj.nodes.length
     }
   end
 end
