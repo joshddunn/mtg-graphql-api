@@ -1,0 +1,7 @@
+one:
+  card_id: 1
+  supertype_id: 1
+
+two:
+  card_id: 2
+  supertype_id: 1
