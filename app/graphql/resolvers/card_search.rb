@@ -11,10 +11,10 @@ class Resolvers::CardSearch
   CardFilter = GraphQL::InputObjectType.define do
     name 'CardFilter'
 
-    argument :OR, -> { types[CardFilter] }, description: "Allows you to chain multiple card filters." 
+    argument :OR, -> { types[CardFilter] }, description: "Allows you to chain multiple card filters."
 
-    argument :name, types.String, description: "Allows you to search for a magic card by name." 
-    argument :nameLike, types.String, description: "Allows you to search for a magic card similar to a name." 
+    argument :name, types.String, description: "Allows you to search for a magic card by name."
+    argument :nameLike, types.String, description: "Allows you to search for a magic card similar to a name."
     argument :type, types.String, description: "Allows you to search for a magic card by type."
     argument :subtype, types.String, description: "Allows you to search for a magic card by subtype."
     argument :supertype, types.String, description: "Allows you to search for a magic card by supertype."
