@@ -28,7 +28,7 @@ class Resolvers::CardSearchTest < ActiveSupport::TestCase
 
     assert_equal result.first.name, "swamp"
   end
-  
+
   test 'card_search: nameLike' do
     result = find(
       filter: {

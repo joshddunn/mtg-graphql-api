@@ -7,7 +7,7 @@ class Card < ApplicationRecord
 
   has_many :color_associations
   has_many :colors, through: :color_associations
-  
+
   has_many :subtype_associations
   has_many :subtypes, through: :subtype_associations
 
