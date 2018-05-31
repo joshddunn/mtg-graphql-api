@@ -1,3 +1,4 @@
+# mtgql controller
 class MtgqlController < ApplicationController
   def query
     result = MyappSchema.execute params[:query]
