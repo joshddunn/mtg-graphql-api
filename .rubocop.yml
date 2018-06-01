@@ -1,2 +1,6 @@
 AllCops:
   TargetRubyVersion: 2.4.2
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
