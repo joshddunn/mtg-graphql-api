@@ -1,53 +1,74 @@
+# frozen_string_literal: true
+
 require 'search_object/plugin/graphql'
 
-class Resolvers::CardSearch
-  include SearchObject.module(:graphql)
-  description "Returns paginated information about magic cards."
+# graphql card search resolver
+module Resolvers
+  class CardSearch
+    include SearchObject.module(:graphql)
+    description 'Returns paginated information about magic cards.'
 
-  scope { Card.all }
+    scope { Card.all }
 
-  type Types::CardConnectionType
+    type Types::CardConnectionType
 
-  CardFilter = GraphQL::InputObjectType.define do
-    name 'CardFilter'
+    CardFilter = GraphQL::InputObjectType.define do
+      name 'CardFilter'
 
-    argument :OR, -> { types[CardFilter] }, description: "Allows you to chain multiple card filters."
+      argument :OR, -> { types[CardFilter] },
+               description: 'Allows you to chain multiple card filters.'
 
-    argument :name, types.String, description: "Allows you to search for a magic card by name."
-    argument :nameLike, types.String, description: "Allows you to search for a magic card similar to a name."
-    argument :type, types.String, description: "Allows you to search for a magic card by type."
-    argument :subtype, types.String, description: "Allows you to search for a magic card by subtype."
-    argument :supertype, types.String, description: "Allows you to search for a magic card by supertype."
-  end
+      argument :name, types.String,
+               description: 'Allows you to search for a magic card by name.'
 
-  option :filter, type: CardFilter, with: :apply_filter, description: "Returns nodes that satisfy the filter arguments."
-  option :order, type: types[types.String], with: :apply_order, description: "Returns nodes ordered by the specified field."
+      argument :nameLike, types.String,
+               description: 'Allows you to search for a magic card ' \
+                            'similar to a name.'
 
-  def apply_filter(scope, value)
-    branches = normalize_filters(value).reduce { |a,b| a.or(b) }
-    scope.merge branches
-  end
+      argument :type, types.String,
+               description: 'Allows you to search for a magic card by type.'
 
-  def apply_order(scope, value)
-    value.each do |v|
-      scope = scope.order(v)
+      argument :subtype, types.String,
+               description: 'Allows you to search for a magic card by subtype.'
+
+      argument :supertype, types.String,
+               description: 'Allows you to search for a magic card ' \
+                            'by supertype.'
     end
-    scope
-  end
 
-  def normalize_filters(value, branches = [])
-    scope = Card.all
+    option :filter, type: CardFilter, with: :apply_filter,
+                    description: 'Returns nodes that satisfy the filter ' \
+                                 'arguments.'
 
-    scope = scope.where(name: value['name']) unless value['name'].nil?
-    scope = scope.where("lower(name) like ?", "#{value['nameLike'].gsub(/\%/,"")}%") unless value['nameLike'].nil?
-    scope = scope.includes(:types).where("types.identifier": value['type']) unless value['type'].nil?
-    scope = scope.includes(:subtypes).where("subtypes.identifier": value['subtype']) unless value['subtype'].nil?
-    scope = scope.includes(:supertypes).where("supertypes.identifier": value['supertype']) unless value['supertype'].nil?
+    option :order, type: types[types.String], with: :apply_order,
+                   description: 'Returns nodes ordered by the specified field.'
 
-    branches << scope
+    def apply_filter(scope, value)
+      branches = normalize_filters(value).reduce { |a, b| a.or(b) }
+      scope.merge branches
+    end
 
-    value['OR'].reduce(branches) { |s,v| normalize_filters(v, s) } if value['OR'].present?
+    def apply_order(scope, value)
+      value.each do |v|
+        scope = scope.order(v)
+      end
+      scope
+    end
 
-    branches
+    def normalize_filters(value, branches = [])
+      scope = Card.all
+
+      scope = scope.where(name: value['name']) unless value['name'].nil?
+      scope = scope.where('lower(name) like ?', "#{value['nameLike'].gsub(/\%/,"")}%") unless value['nameLike'].nil?
+      scope = scope.includes(:types).where('types.identifier': value['type']) unless value['type'].nil?
+      scope = scope.includes(:subtypes).where('subtypes.identifier': value['subtype']) unless value['subtype'].nil?
+      scope = scope.includes(:supertypes).where('supertypes.identifier': value['supertype']) unless value['supertype'].nil?
+
+      branches << scope
+
+      value['OR'].reduce(branches) { |s, v| normalize_filters(v, s) } if value['OR'].present?
+
+      branches
+    end
   end
 end
