@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'search_object/plugin/graphql'
 
 module Resolvers
@@ -22,7 +24,8 @@ module Resolvers
     end
 
     option :filter, type: MagicSetFilter, with: :apply_filter,
-                    description: 'Return nodes that satisfy the filter arguments.'
+                    description: 'Return nodes that satisfy the ' \
+                                 'filter arguments.'
     option :order, type: types[types.String], with: :apply_order,
                    description: 'Return nodes ordered by the specified field.'
 
