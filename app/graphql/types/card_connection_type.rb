@@ -9,8 +9,8 @@ Types::CardConnectionType = Types::CardType.define_connection do
 
     type types.Int
 
-    resolve lambda do |obj, _args, _ctx|
+    resolve -> (obj, _args, _ctx) {
       obj.nodes.length
-    end
+    }
   end
 end

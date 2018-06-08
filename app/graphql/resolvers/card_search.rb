@@ -4,6 +4,7 @@ require 'search_object/plugin/graphql'
 
 # graphql card search resolver
 module Resolvers
+  # mtg card search
   class CardSearch
     include SearchObject.module(:graphql)
     description 'Returns paginated information about magic cards.'
