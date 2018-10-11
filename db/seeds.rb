@@ -1,6 +1,6 @@
 require 'json'
 
-file = File.read('db/data/3.12.8.json')
+file = File.read('db/data/3.19.2.json')
 data_hash = JSON.parse(file, symbolize_names: true)
 
 artists = []
@@ -24,11 +24,11 @@ data_hash.each do |key, value|
 
   # blocks
   if value[:block].present?
-    blocks.push value[:block] unless blocks.include? value[:block] 
+    blocks.push value[:block] unless blocks.include? value[:block]
   end
 
   # card_descriptions
-  if value[:booster].present? 
+  if value[:booster].present?
     value[:booster].each do |booster|
       if booster.kind_of? Array
         booster.each do |b|
@@ -49,38 +49,38 @@ data_hash.each do |key, value|
     # supertypes
     if card[:supertypes].kind_of? Array
       card[:supertypes].each do |supertype|
-        supertypes.push supertype unless supertypes.include? supertype 
+        supertypes.push supertype unless supertypes.include? supertype
       end
     end
 
     # artist
-    artists.push card[:artist] unless artists.include? card[:artist] 
+    artists.push card[:artist] unless artists.include? card[:artist]
 
     # subtypes
     if card[:subtypes].kind_of? Array
       card[:subtypes].each do |subtype|
-        subtypes.push subtype unless subtypes.include? subtype 
+        subtypes.push subtype unless subtypes.include? subtype
       end
     end
 
     # types
     if card[:types].kind_of? Array
       card[:types].each do |type|
-        types.push type unless types.include? type 
+        types.push type unless types.include? type
       end
     end
 
     # colors
     if card[:colors].kind_of? Array
       card[:colors].each do |color|
-        colors.push color unless colors.include? color 
+        colors.push color unless colors.include? color
       end
     end
 
     # color identity
     if card[:colorIdentity].kind_of? Array
       card[:colorIdentity].each do |color_identity|
-        color_identities.push color_identity unless color_identities.include? color_identity 
+        color_identities.push color_identity unless color_identities.include? color_identity
       end
     end
   end
@@ -142,11 +142,11 @@ data_hash.each do |key, value|
     value[:booster].each_with_index do |v, index|
       if v.kind_of? Array
         v.each do |vv|
-          Booster.new(magic_set_id: set.id, position: index + 1, 
+          Booster.new(magic_set_id: set.id, position: index + 1,
                       card_description_id: CardDescription.where(identifier: vv).first.id).save!
         end
       else
-        Booster.new(magic_set_id: set.id, position: index + 1, 
+        Booster.new(magic_set_id: set.id, position: index + 1,
                     card_description_id: CardDescription.where(identifier: v).first.id).save!
       end
     end
@@ -183,7 +183,7 @@ data_hash.each do |key, value|
       multiverseid: card[:multiverseid],
       image_name: card[:imageName],
       layout: card[:layout],
-      mana_cost: card[:mana_cost],
+      mana_cost: card[:manaCost],
       name: card[:name],
       number: card[:number],
       power: card[:power],
@@ -200,7 +200,7 @@ data_hash.each do |key, value|
       reserved: card[:reserved] ? true : false,
       hand: card[:hand],
       life: card[:life],
-      timeshifted: card[:timeshifted] ? true : false, 
+      timeshifted: card[:timeshifted] ? true : false,
       starter: card[:starter] ? true : false
     )
   end

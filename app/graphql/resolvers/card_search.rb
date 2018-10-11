@@ -59,7 +59,7 @@ module Resolvers
     def normalize_filters(value, branches = [])
       scope = Card.all
 
-      scope = scope.where(name: value['name']) unless value['name'].nil?
+      scope = scope.where('lower(name) = ?', value['name'].downcase) unless value['name'].nil?
       scope = scope.where('lower(name) like ?', "#{value['nameLike'].gsub(/\%/,"")}%") unless value['nameLike'].nil?
       scope = scope.includes(:types).where('types.identifier': value['type']) unless value['type'].nil?
       scope = scope.includes(:subtypes).where('subtypes.identifier': value['subtype']) unless value['subtype'].nil?

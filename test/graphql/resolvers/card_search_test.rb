@@ -11,9 +11,9 @@ module Resolvers
     test 'card_search: name OR' do
       result = find(
         filter: {
-          'name' => ['swamp'],
+          'name' => 'swamp',
           'OR' => [{
-            'name' => ['island']
+            'name' => 'island'
           }]
         }
       )
@@ -24,7 +24,7 @@ module Resolvers
     test 'card_search: name' do
       result = find(
         filter: {
-          name: ['swamp']
+          name: 'swamp'
         }
       )
 
@@ -34,7 +34,7 @@ module Resolvers
     test 'card_search: nameLike' do
       result = find(
         filter: {
-          nameLike: ['swa']
+          nameLike: 'swa'
         }
       )
 
@@ -44,7 +44,7 @@ module Resolvers
     test 'card_search: type' do
       result = find(
         filter: {
-          type: ['Land']
+          type: 'Land'
         }
       )
 
@@ -54,7 +54,7 @@ module Resolvers
     test 'card_search: subtype' do
       result = find(
         filter: {
-          subtype: ['Swamp']
+          subtype: 'Swamp'
         }
       )
 
@@ -64,7 +64,7 @@ module Resolvers
     test 'card_search: supertype' do
       result = find(
         filter: {
-          supertype: ['Basic']
+          supertype: 'Basic'
         }
       )
 

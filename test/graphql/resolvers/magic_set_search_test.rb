@@ -11,9 +11,9 @@ module Resolvers
     test 'magic_set_search: name OR' do
       result = find(
         filter: {
-          'name' => ['Unstable'],
+          'name' => 'Unstable',
           'OR' => [{
-            'name' => ['Unhinged']
+            'name' => 'Unhinged'
           }]
         }
       )
@@ -24,7 +24,7 @@ module Resolvers
     test 'magic_set_search: name' do
       result = find(
         filter: {
-          'name' => ['Unstable']
+          'name' => 'Unstable'
         }
       )
 

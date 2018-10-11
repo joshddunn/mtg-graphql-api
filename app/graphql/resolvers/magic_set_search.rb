@@ -44,7 +44,7 @@ module Resolvers
     def normalize_filters(value, branches = [])
       scope = MagicSet.all
 
-      scope = scope.where(name: value['name']) unless value['name'].nil?
+      scope = scope.where('lower(name) = ?', value['name'].downcase) unless value['name'].nil?
 
       branches << scope
 
