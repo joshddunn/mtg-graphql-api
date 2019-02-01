@@ -6,12 +6,12 @@ jobs:
       - image: circleci/ruby:2.4.1
         environment:
           PGHOST: localhost
-          PGUSER: mtg-graphql-api
+          PGUSER: postgres
           RAILS_ENV: test
       - image: postgres:9.5
         environment:
-          POSTGRES_USER: mtg-graphql-api
-          POSTGRES_DB: mtg-graphql-api_test
+          POSTGRES_USER: postgres
+          POSTGRES_DB: myapp_test
           POSTGRES_PASSWORD: ""
     steps:
       - checkout
@@ -23,6 +23,7 @@ jobs:
 
       # Bundle install dependencies
       - run: bundle install --path vendor/bundle
+      - run: mv circle.env .env
 
       # Cache Dependencies
       - type: cache-save
@@ -37,7 +38,7 @@ jobs:
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       # Setup the database
-      - run: bundle exec rake db:setup
+      - run: bundle exec rake db:create db:schema:load
 
       # Run the tests
-      - run: bundle exec rake
+      - run: bundle exec rails t
