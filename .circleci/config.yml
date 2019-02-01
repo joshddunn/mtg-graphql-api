@@ -16,8 +16,6 @@ jobs:
     steps:
       - checkout
 
-      - run: apt-get install nodejs
-
       # Restore Cached Dependencies
       - type: cache-restore
         name: Restore bundle cache
