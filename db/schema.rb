@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_080831) do
+ActiveRecord::Schema.define(version: 2019_02_03_093848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["identifier"], name: "index_card_descriptions_on_identifier"
+  end
+
+  create_table "card_token_associations", force: :cascade do |t|
+    t.bigint "card_id"
+    t.bigint "token_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_card_token_associations_on_card_id"
+    t.index ["token_id"], name: "index_card_token_associations_on_token_id"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -92,6 +101,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
     t.index ["artist_id"], name: "index_cards_on_artist_id"
     t.index ["identifier"], name: "index_cards_on_identifier"
     t.index ["magic_set_id"], name: "index_cards_on_magic_set_id"
+    t.index ["name"], name: "index_cards_on_name"
   end
 
   create_table "color_associations", force: :cascade do |t|
@@ -289,6 +299,8 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
 
   add_foreign_key "boosters", "card_descriptions"
   add_foreign_key "boosters", "magic_sets"
+  add_foreign_key "card_token_associations", "cards"
+  add_foreign_key "card_token_associations", "tokens"
   add_foreign_key "cards", "artists"
   add_foreign_key "cards", "magic_sets"
   add_foreign_key "color_associations", "cards"
