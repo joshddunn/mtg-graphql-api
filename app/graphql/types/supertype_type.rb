@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::SupertypeType = GraphQL::ObjectType.define do
   name 'Supertype'
   description 'Contains information about magic card supertypes.'

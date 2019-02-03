@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::ColorType = GraphQL::ObjectType.define do
   name 'Color'
   description 'Returns information about magic card colors.'

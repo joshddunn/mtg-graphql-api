@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_23_092357) do
+ActiveRecord::Schema.define(version: 2019_02_03_032704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,12 +57,11 @@ ActiveRecord::Schema.define(version: 2018_01_23_092357) do
 
   create_table "cards", force: :cascade do |t|
     t.string "identifier"
-    t.integer "multiverseid"
+    t.integer "multiverse_id"
     t.bigint "artist_id"
     t.bigint "magic_set_id"
-    t.integer "cmc"
-    t.string "image_name"
-    t.integer "layout"
+    t.float "converted_mana_cost"
+    t.string "layout"
     t.string "mana_cost"
     t.string "name"
     t.string "number"
@@ -72,18 +71,31 @@ ActiveRecord::Schema.define(version: 2018_01_23_092357) do
     t.string "toughness"
     t.string "card_type"
     t.string "watermark"
-    t.string "flavor"
-    t.string "mci_number"
-    t.string "border"
-    t.date "release_date"
-    t.integer "loyalty"
-    t.boolean "reserved"
-    t.integer "hand"
-    t.integer "life"
-    t.boolean "timeshifted"
+    t.string "flavor_text"
+    t.string "border_color"
+    t.string "loyalty"
+    t.string "hand"
+    t.string "life"
     t.boolean "starter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "duel_deck"
+    t.float "face_converted_mana_cost"
+    t.string "frame_effect"
+    t.string "frame_version"
+    t.boolean "has_foil"
+    t.boolean "has_non_foil"
+    t.boolean "is_alternate"
+    t.boolean "is_foil_only"
+    t.boolean "is_online_only"
+    t.boolean "is_reserved"
+    t.boolean "is_timeshifted"
+    t.boolean "is_oversized"
+    t.jsonb "legalities"
+    t.string "original_text"
+    t.string "original_type"
+    t.string "side"
+    t.string "tcgplayer_product_id"
     t.index ["artist_id"], name: "index_cards_on_artist_id"
     t.index ["identifier"], name: "index_cards_on_identifier"
     t.index ["magic_set_id"], name: "index_cards_on_magic_set_id"
@@ -102,6 +114,7 @@ ActiveRecord::Schema.define(version: 2018_01_23_092357) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_color_identities_on_identifier"
   end
 
   create_table "color_identity_associations", force: :cascade do |t|
@@ -117,6 +130,7 @@ ActiveRecord::Schema.define(version: 2018_01_23_092357) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_colors_on_identifier"
   end
 
   create_table "magic_rarities_codes", force: :cascade do |t|
@@ -131,17 +145,19 @@ ActiveRecord::Schema.define(version: 2018_01_23_092357) do
     t.string "name"
     t.string "code"
     t.date "release_date"
-    t.string "border"
     t.string "set_type"
-    t.string "mkm_name"
-    t.integer "mkm_id"
-    t.string "magic_cards_info_code"
-    t.string "gatherer_code"
-    t.string "old_code"
-    t.boolean "online_only"
+    t.boolean "is_online_only"
     t.bigint "block_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "base_set_size"
+    t.string "code_v3"
+    t.boolean "is_foil_only"
+    t.date "meta_date"
+    t.string "meta_version"
+    t.string "mtgo_code"
+    t.integer "tcgplayer_group_id"
+    t.integer "total_set_size"
     t.index ["block_id"], name: "index_magic_sets_on_block_id"
   end
 

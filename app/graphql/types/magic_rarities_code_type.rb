@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::MagicRaritiesCodeType = GraphQL::ObjectType.define do
   name 'MagicRaritiesCode'
   description 'Contains information about the magic rarity code for a ' \

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::BlockType = GraphQL::ObjectType.define do
   name 'Block'
   description 'Contains informaiton about a magic set block.'

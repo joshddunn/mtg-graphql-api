@@ -58,13 +58,6 @@
       
         
       <li>
-        <a href="/object/alternativename/" class="sidebar-link">
-          AlternativeName
-        </a>
-      </li>
-      
-        
-      <li>
         <a href="/object/artist/" class="sidebar-link">
           Artist
         </a>
@@ -128,13 +121,6 @@
       
         
       <li>
-        <a href="/object/magicraritiescode/" class="sidebar-link">
-          MagicRaritiesCode
-        </a>
-      </li>
-      
-        
-      <li>
         <a href="/object/magicset/" class="sidebar-link">
           MagicSet
         </a>
@@ -172,13 +158,6 @@
       <li>
         <a href="/object/supertype/" class="sidebar-link">
           Supertype
-        </a>
-      </li>
-      
-        
-      <li>
-        <a href="/object/translation/" class="sidebar-link">
-          Translation
         </a>
       </li>
       
@@ -316,6 +295,13 @@
       
       
       <li>
+        <a href="/scalar/json/" class="sidebar-link">
+          JSON
+        </a>
+      </li>
+      
+      
+      <li>
         <a href="/scalar/string/" class="sidebar-link">
           String
         </a>
@@ -353,7 +339,7 @@
   </td>
   <td>
     <p></p>
-<p>Returns the elements in the list that come after the specified global ID.</p>
+<p>Returns the elements in the list that come after the specified cursor.</p>
   </td>
   </tr>
   <tr>
@@ -363,7 +349,7 @@
   </td>
   <td>
     <p></p>
-<p>Returns the elements in the list that come before the specified global ID.</p>
+<p>Returns the elements in the list that come before the specified cursor.</p>
   </td>
   </tr>
   <tr>
@@ -393,9 +379,9 @@
 <h2>
 <a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
 <div class="field-entry ">
-  <span id="alternativenames" class="field-name">alternativeNames (<code><a href="/object/alternativename">[AlternativeName]</a></code>)</span>
+  <span id="basesetsize" class="field-name">baseSetSize (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of alternative names for the magic set.</p>
+  <p>Returns base set size of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -411,63 +397,45 @@
   </div>
 </div>
 <div class="field-entry ">
-  <span id="border" class="field-name">border (<code><a href="/scalar/string">String</a></code>)</span>
-  <div class="description-wrapper">
-  <p>Returns the border color of magic cards in the set. This field returns either null, silver, black, or white.</p>
-  </div>
-</div>
-<div class="field-entry ">
   <span id="code" class="field-name">code (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
   <p>Returns the code of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="gatherercode" class="field-name">gathererCode (<code><a href="/scalar/string">String</a></code>)</span>
+  <span id="isfoilonly" class="field-name">isFoilOnly (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns the gatherer code of the magic set.</p>
+  <p>Returns whether the magic set was only released online.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="magiccardsinfocode" class="field-name">magicCardsInfoCode (<code><a href="/scalar/string">String</a></code>)</span>
+  <span id="isonlineonly" class="field-name">isOnlineOnly (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns the magic cards info code of the magic set.</p>
+  <p>Returns whether the magic set was only released online.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="magicraritiescodes" class="field-name">magicRaritiesCodes (<code><a href="/object/magicraritiescode">[MagicRaritiesCode]</a></code>)</span>
+  <span id="metadate" class="field-name">metaDate (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of magic rarity codes for the magic set.</p>
+  <p>Returns the meta date property of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="mkmname" class="field-name">mkmName (<code><a href="/scalar/string">String</a></code>)</span>
+  <span id="metaversion" class="field-name">metaVersion (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns the MKM name of the magic set.</p>
+  <p>Returns the meta version property of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="mkm_id" class="field-name">mkm_id (<code><a href="/scalar/int">Int</a></code>)</span>
+  <span id="mtgocode" class="field-name">mtgoCode (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns the MKM id of the magic set.</p>
+  <p>Returns the mtgo code of the magic set.</p>
   </div>
 </div>
 <div class="field-entry ">
   <span id="name" class="field-name">name (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
   <p>Returns the name of the magic set.</p>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="oldcode" class="field-name">oldCode (<code><a href="/scalar/string">String</a></code>)</span>
-  <div class="description-wrapper">
-  <p>Returns the old code of the magic set.</p>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="onlineonly" class="field-name">onlineOnly (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
-  <div class="description-wrapper">
-  <p>Returns whether the magic set was only released online.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -483,9 +451,15 @@
   </div>
 </div>
 <div class="field-entry ">
-  <span id="translations" class="field-name">translations (<code><a href="/object/translation">[Translation]</a></code>)</span>
+  <span id="tcgplayergroupid" class="field-name">tcgplayerGroupId (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
-  <p>Returns a list of translations for the name of the magic set.</p>
+  <p>Returns the tcgplayer group id of the magic set.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="totalsetsize" class="field-name">totalSetSize (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the total set size of the magic set.</p>
   </div>
 </div>
 

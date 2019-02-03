@@ -1,6 +1,106 @@
 AllCops:
   TargetRubyVersion: 2.4.2
+  Exclude:
+    - 'bin/yarn'
+    - 'bin/spring'
+    - 'bin/rake'
+    - 'bin/setup'
+    - 'bin/bundle'
+    - 'bin/update'
+    - 'bin/rails'
+    - 'db/schema.rb'
+    - 'lib/graphql-types/build_types.rb'
+    - 'vendor/**/*'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'db/migrate/20190203032704_add_indexes_for_seeds.rb'
+
 Metrics/ModuleLength:
   Enabled: false
+
 Metrics/BlockLength:
   Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Exclude:
+    - 'config/spring.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/StringLiterals:
+  Exclude:
+    - 'Gemfile'
+    - 'config/**/*'
+    - 'test/application_system_test_case.rb'
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Exclude:
+    - 'config/environments/*.rb'
+
+Rails/FilePath:
+  Exclude:
+    - 'config/environments/*.rb'
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'test/test_helper.rb'
+
+Style/ExpandPathArguments:
+  Exclude:
+    - 'test/test_helper.rb'
+
+Style/HashSyntax:
+  Exclude:
+    - 'config/application.rb'
+
+Style/Proc:
+  Exclude:
+    - 'app/controllers/application_controller.rb'
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Performance/StringReplacement:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/Next:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/ReversibleMigration:
+  Enabled: false
+
+Rails/BulkChangeTable:
+  Enabled: false
+
+Rails/Output:
+  Exclude:
+    - 'db/seeds.rb'

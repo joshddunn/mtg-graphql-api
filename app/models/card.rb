@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# magic card information
 class Card < ApplicationRecord
   belongs_to :artist
   belongs_to :magic_set

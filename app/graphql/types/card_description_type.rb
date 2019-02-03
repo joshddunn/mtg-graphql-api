@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::CardDescriptionType = GraphQL::ObjectType.define do
   name 'CardDescription'
   description 'Contains information about card slots in a booster pack.'

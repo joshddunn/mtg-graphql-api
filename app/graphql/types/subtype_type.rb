@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::SubtypeType = GraphQL::ObjectType.define do
   name 'Subtype'
   description 'Contains information about magic card subtypes.'

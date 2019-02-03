@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::BoosterType = GraphQL::ObjectType.define do
   name 'Booster'
   description 'Contains information about a booster pack for a magic set.'

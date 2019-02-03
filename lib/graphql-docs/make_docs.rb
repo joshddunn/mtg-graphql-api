@@ -1,15 +1,15 @@
 # load "./lib/graphql-docs/make_docs.rb"
 
-file = File.new("./lib/graphql-docs/schema.idl", "w")
+file = File.new('./lib/graphql-docs/schema.idl', 'w')
 file.write GraphQL::Schema::Printer.print_schema(MyappSchema)
 file.close
 
-path = "./lib/graphql-docs"
+path = './lib/graphql-docs'
 
 GraphQLDocs.build(
-  filename: "./lib/graphql-docs/schema.idl",
-  output_dir: "./public/",
-  base_url: "",
+  filename: './lib/graphql-docs/schema.idl',
+  output_dir: './public/',
+  base_url: '',
   templates: {
     default: "#{path}/layouts/default.html",
     includes: "#{path}/layouts/includes",
@@ -20,7 +20,7 @@ GraphQLDocs.build(
     enums: "#{path}/layouts/graphql_enums.html",
     unions: "#{path}/layouts/graphql_unions.html",
     input_objects: "#{path}/layouts/graphql_input_objects.html",
-    scalars: "#{path}/layouts/graphql_scalars.html",
+    scalars: "#{path}/layouts/graphql_scalars.html"
   },
   landing_pages: {
     index: "#{path}/landing_pages/index.md",

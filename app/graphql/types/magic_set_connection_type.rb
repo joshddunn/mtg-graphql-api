@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::MagicSetConnectionType = Types::MagicSetType.define_connection do
   name 'MagicSetConnection'
   description 'Returns paginated information about magic the gathering sets.'
@@ -9,7 +7,7 @@ Types::MagicSetConnectionType = Types::MagicSetType.define_connection do
 
     type types.Int
 
-    resolve -> (obj, _args, _ctx) {
+    resolve ->(obj, _args, _ctx) {
       obj.nodes.length
     }
   end

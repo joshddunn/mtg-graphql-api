@@ -19,3 +19,5 @@
 .byebug_history
 
 .DS_Store
+db/data/*.json
+!db/data/*.zip

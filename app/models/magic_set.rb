@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# magic set information
 class MagicSet < ApplicationRecord
   belongs_to :block, optional: true
 

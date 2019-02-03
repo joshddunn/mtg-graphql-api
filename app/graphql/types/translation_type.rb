@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::TranslationType = GraphQL::ObjectType.define do
   name 'Translation'
   description 'Contains information about the translated name of a magic set.'
