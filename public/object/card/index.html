@@ -114,8 +114,8 @@
       
         
       <li>
-        <a href="/object/coloridentity/" class="sidebar-link">
-          ColorIdentity
+        <a href="/object/foreigndatum/" class="sidebar-link">
+          ForeignDatum
         </a>
       </li>
       
@@ -149,6 +149,13 @@
       
         
       <li>
+        <a href="/object/ruling/" class="sidebar-link">
+          Ruling
+        </a>
+      </li>
+      
+        
+      <li>
         <a href="/object/subtype/" class="sidebar-link">
           Subtype
         </a>
@@ -158,6 +165,27 @@
       <li>
         <a href="/object/supertype/" class="sidebar-link">
           Supertype
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/token/" class="sidebar-link">
+          Token
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/tokenconnection/" class="sidebar-link">
+          TokenConnection
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/tokenedge/" class="sidebar-link">
+          TokenEdge
         </a>
       </li>
       
@@ -339,9 +367,15 @@ subtype, supertype, and type of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="coloridentities" class="field-name">colorIdentities (<code><a href="/object/coloridentity">[ColorIdentity]</a></code>)</span>
+  <span id="coloridentities" class="field-name">colorIdentities (<code><a href="/object/color">[Color]</a></code>)</span>
   <div class="description-wrapper">
   <p>Returns a list of color identities for the magic card.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="colorindicators" class="field-name">colorIndicators (<code><a href="/object/color">[Color]</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns a list of color indicators for the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -372,6 +406,12 @@ subtype, supertype, and type of the magic card.</p>
   <span id="flavortext" class="field-name">flavorText (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
   <p>Returns the flavour text printed on the magic card.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="foreigndata" class="field-name">foreignData (<code><a href="/object/foreigndatum">[ForeignDatum]</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the foreign data associated with this magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -495,6 +535,12 @@ subtype, supertype, and type of the magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
+  <span id="names" class="field-name">names (<code><a href="/scalar/string">[String]</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the names as printed on the magic card.</p>
+  </div>
+</div>
+<div class="field-entry ">
   <span id="number" class="field-name">number (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
   <p>Returns the set number of the magic card.</p>
@@ -528,6 +574,12 @@ subtype, supertype, and type of the magic card.</p>
   <span id="rarity" class="field-name">rarity (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
   <p>Returns the rarity of the magic card.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="rulings" class="field-name">rulings (<code><a href="/object/ruling">[Ruling]</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the rulings associated with this magic card.</p>
   </div>
 </div>
 <div class="field-entry ">
@@ -570,6 +622,12 @@ subtype, supertype, and type of the magic card.</p>
   <span id="text" class="field-name">text (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
   <p>Returns the text inside of the rules box on the card.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="tokens" class="field-name">tokens (<code><a href="/object/token">[Token]</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns a list of tokens that are referenced by this card.</p>
   </div>
 </div>
 <div class="field-entry ">
