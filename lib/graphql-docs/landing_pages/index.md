@@ -8,9 +8,7 @@ MTGQL is a GraphQL API for the card game Magic: The Gathering.
 
 This API is in *beta* so endpoints and structure may change without notice.
 
-Requests should be made to
-
-    `https://mtgql.com/v1`
+Requests should be made to `https://mtgql.com/v1`
 
 You can test queries [here](https://mtgql.com/graphiql).
 
@@ -22,14 +20,10 @@ Just starting out with GraphQL? Check out GraphQL's [official documentation](htt
 
 ## Acknowledgments
 
-Card data sourced from [MTG JSON](https://mtgjson.com). 
+Card data sourced from [MTG JSON](https://mtgjson.com) (version 4.2.1).
 
 This API contains data that is Copyright © Wizards of the Coast - All Rights Reserved.
 
 MTGQL is not affiliated with MTG JSON or Wizards of the Coast in any way.
 
 MTGQL was built by [Josh Dunn](https://joshddunn.com).
-
-## PokeQL
-
-If you like the pokemon video games, check out [pokeql.com](https://pokeql.com).

@@ -160,6 +160,10 @@ Types::CardType = GraphQL::ObjectType.define do
         'Returns the tcgplayer product id of the card',
         property: :tcgplayer_product_id
 
+  field :scryfallId, types.String,
+        'Returns the scryfall id of the card',
+        property: :scryfall_id
+
   field :colorIdentities, types[Types::ColorIdentityType],
         'Returns a list of color identities for the magic card.',
         property: :color_identities
@@ -183,4 +187,8 @@ Types::CardType = GraphQL::ObjectType.define do
   field :variants, types[Types::CardType],
         'Returns a list of the variations of the magic card.',
         property: :variants
+
+  field :printings, types[Types::MagicSetType],
+        'Returns the magic sets in which a version of this card was printed.',
+        property: :printings
 end

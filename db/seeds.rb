@@ -3,9 +3,13 @@ require 'zip'
 
 VERSION = '4.2.1'.freeze
 
-Zip::File.open("db/data/#{VERSION}.json.zip") do |zipfile|
+file_path = "db/data/#{VERSION}.json"
+
+File.delete(file_path) if File.exist?(file_path)
+
+Zip::File.open("#{file_path}.zip") do |zipfile|
   zipfile.each do |file|
-    file.extract("db/data/#{VERSION}.json")
+    file.extract(file_path)
     data_hash = JSON.parse(file.get_input_stream.read, symbolize_names: true)
 
     artists = []
@@ -218,106 +222,119 @@ Zip::File.open("db/data/#{VERSION}.json.zip") do |zipfile|
           original_text: card[:originalText],
           original_type: card[:originalType],
           side: card[:side],
-          tcgplayer_product_id: card[:tcgplayerProductId]
+          tcgplayer_product_id: card[:tcgplayerProductId],
+          scryfall_id: card[:scryfallId]
         )
       end
       Card.import information, validate: false
 
-      information = []
+      color_identity_information = []
+      color_information = []
+      subtype_information = []
+      supertype_information = []
+      type_information = []
+
       value[:cards].each do |card|
         # color identity assoc
         if card[:colorIdentity].present?
           info = Card.find_by(identifier: card[:uuid])
           card[:colorIdentity].each do |color_identity|
-            information.push ColorIdentityAssociation.new(
+            color_identity_information.push ColorIdentityAssociation.new(
               card_id: info.id,
               color_identity_id: ColorIdentity.where(identifier: color_identity).first.id
             )
           end
         end
-      end
-      ColorIdentityAssociation.import information, validate: false
 
-      information = []
-      value[:cards].each do |card|
         # color assoc
         if card[:colors].present?
           info = Card.find_by(identifier: card[:uuid])
           card[:colors].each do |color|
-            information.push ColorAssociation.new(
+            color_information.push ColorAssociation.new(
               card_id: info.id,
               color_id: Color.where(identifier: color).first.id
             )
           end
         end
-      end
-      ColorAssociation.import information, validate: false
 
-      information = []
-      value[:cards].each do |card|
         # subtype assoc
         if card[:subtypes].present?
           info = Card.find_by(identifier: card[:uuid])
           card[:subtypes].each do |subtype|
-            information.push SubtypeAssociation.new(
+            subtype_information.push SubtypeAssociation.new(
               card_id: info.id,
               subtype_id: Subtype.where(identifier: subtype).first.id
             )
           end
         end
-      end
-      SubtypeAssociation.import information, validate: false
 
-      information = []
-      value[:cards].each do |card|
         # supertype assoc
         if card[:supertypes].present?
           info = Card.find_by(identifier: card[:uuid])
           card[:supertypes].each do |supertype|
-            information.push SupertypeAssociation.new(
+            supertype_information.push SupertypeAssociation.new(
               card_id: info.id,
               supertype_id: Supertype.where(identifier: supertype).first.id
             )
           end
         end
-      end
-      SupertypeAssociation.import information, validate: false
 
-      information = []
-      value[:cards].each do |card|
         # type assoc
         if card[:types].present?
           info = Card.find_by(identifier: card[:uuid])
           card[:types].each do |type|
-            information.push TypeAssociation.new(
+            type_information.push TypeAssociation.new(
               card_id: info.id,
               type_id: Type.where(identifier: type).first.id
             )
           end
         end
       end
-      TypeAssociation.import information, validate: false
 
-      puts "#{key} (#{current} of #{total})"
+      ColorIdentityAssociation.import color_identity_information, validate: false
+      ColorAssociation.import color_information, validate: false
+      TypeAssociation.import type_information, validate: false
+      SupertypeAssociation.import supertype_information, validate: false
+      SubtypeAssociation.import subtype_information, validate: false
+
+      puts "P2 -- #{key} (#{current} of #{total})"
       current += 1
     end
 
     puts 'Phase 2 seeding is complete'
 
+    current = 1
     data_hash.each do |_, value|
-      information = []
+      variation_information = []
+      printing_information = []
+
       value[:cards].each do |card|
         # variation assoc
         if card[:variations].present?
           card[:variations].each do |variation|
-            information.push Variation.new(
+            variation_information.push Variation.new(
               card_id: Card.where(identifier: card[:uuid]).first.id,
               variation_id: Card.where(identifier: variation).first.id
             )
           end
         end
+
+        if card[:printings].present?
+          info = Card.find_by(identifier: card[:uuid])
+          card[:printings].each do |code|
+            printing_information.push PrintingAssociation.new(
+              card_id: info.id,
+              magic_set_id: MagicSet.where(code: code).first.id
+            )
+          end
+        end
       end
-      Variation.import information, validate: false
+
+      Variation.import variation_information, validate: false
+      PrintingAssociation.import printing_information, validate: false
+
+      puts "P3 -- #{key} (#{current} of #{total})"
+      current += 1
     end
 
     puts 'Phase 3 seeding is complete'
