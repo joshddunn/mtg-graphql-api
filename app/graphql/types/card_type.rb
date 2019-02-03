@@ -35,6 +35,10 @@ Types::CardType = GraphQL::ObjectType.define do
         'Returns the name as printed on the magic card.',
         property: :name
 
+  field :names, types[types.String],
+        'Returns the names as printed on the magic card.',
+        property: :names
+
   field :number, types.String,
         'Returns the set number of the magic card.',
         property: :number
@@ -164,7 +168,11 @@ Types::CardType = GraphQL::ObjectType.define do
         'Returns the scryfall id of the card',
         property: :scryfall_id
 
-  field :colorIdentities, types[Types::ColorIdentityType],
+  field :colorIndicators, types[Types::ColorType],
+        'Returns a list of color indicators for the magic card.',
+        property: :color_indicators
+
+  field :colorIdentities, types[Types::ColorType],
         'Returns a list of color identities for the magic card.',
         property: :color_identities
 

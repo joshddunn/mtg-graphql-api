@@ -207,6 +207,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
           is_online_only: card[:isOnlineOnly] ? true : false,
           is_oversized: card[:isOversized] ? true : false,
           legalities: card[:legalities],
+          names: card[:names],
           original_text: card[:originalText],
           original_type: card[:originalType],
           side: card[:side],
@@ -217,6 +218,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       Card.import information, validate: false
 
       color_identity_information = []
+      color_indicator_information = []
       color_information = []
       subtype_information = []
       supertype_information = []
@@ -232,6 +234,17 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
             color_identity_information.push ColorIdentityAssociation.new(
               card_id: info.id,
               color_id: Color.where(identifier: color_identity).first.id
+            )
+          end
+        end
+
+        # color indicator assoc
+        if card[:colorIndicator].present?
+          info = Card.find_by(identifier: card[:uuid])
+          card[:colorIndicator].each do |color_indicator|
+            color_indicator_information.push ColorIndicatorAssociation.new(
+              card_id: info.id,
+              color_id: Color.where(identifier: color_indicator).first.id
             )
           end
         end
@@ -310,6 +323,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       end
 
       ColorIdentityAssociation.import color_identity_information, validate: false
+      ColorIndicatorAssociation.import color_indicator_information, validate: false
       ColorAssociation.import color_information, validate: false
       TypeAssociation.import type_information, validate: false
       SupertypeAssociation.import supertype_information, validate: false

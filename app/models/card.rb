@@ -5,6 +5,9 @@ class Card < ApplicationRecord
   has_many :color_identity_associations
   has_many :color_identities, through: :color_identity_associations, source: :color
 
+  has_many :color_indicator_associations
+  has_many :color_indicators, through: :color_indicator_associations, source: :color
+
   has_many :color_associations
   has_many :colors, through: :color_associations
 
