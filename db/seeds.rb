@@ -414,6 +414,20 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       Variation.import variation_information, validate: false
       PrintingAssociation.import printing_information, validate: false
 
+      card_token_information = []
+      value[:tokens].each do |card|
+        # card token assoc
+        if card[:reverseRelated].present?
+          card[:reverseRelated].each do |name|
+            card_token_information.push CardTokenAssociation.new(
+              token_id: Token.where(identifier: card[:uuid]).first.id,
+              card_id: Card.where(name: name).first.id
+            )
+          end
+        end
+      end
+      CardTokenAssociation.import card_token_information, validate: false
+
       puts "P3 -- #{key} (#{current} of #{total})"
       current += 1
     end

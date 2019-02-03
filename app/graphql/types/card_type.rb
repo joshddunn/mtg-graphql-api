@@ -207,4 +207,8 @@ Types::CardType = GraphQL::ObjectType.define do
   field :foreignData, types[Types::ForeignDatumType],
         'Returns the foreign data associated with this magic card.',
         property: :foreign_data
+
+  field :tokens, types[Types::TokenType],
+        'Returns a list of tokens that are referenced by this card.',
+        property: :tokens
 end

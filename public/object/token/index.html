@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="__EnumValue GraphQL documentation">
+    <meta name="description" content="Token GraphQL documentation">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>MTGQL | __enumvalue</title>
+    <title>MTGQL | Token</title>
     <link rel="stylesheet" href="/assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
     <script>
@@ -343,28 +343,123 @@
       <div id="content">
 
         <h1>
-<a id="__enumvalue" class="anchor" href="#__enumvalue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>__EnumValue</h1>
-<p>One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.</p>
+<a id="token" class="anchor" href="#token" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Token</h1>
+<p>Contains information about magic token.</p>
 <h2>
 <a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
 <div class="field-entry ">
-  <span id="name" class="field-name">name (<code><a href="/scalar/string">String!</a></code>)</span>
+  <span id="artist" class="field-name">artist (<code><a href="/object/artist">Artist</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns information about the artist who illustrated the token.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="description" class="field-name">description (<code><a href="/scalar/string">String</a></code>)</span>
+  <span id="bordercolor" class="field-name">borderColor (<code><a href="/scalar/string">String</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns the border color of the magic token. This field will return null, black, silver, or white.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="isdeprecated" class="field-name">isDeprecated (<code><a href="/scalar/boolean">Boolean!</a></code>)</span>
+  <span id="cards" class="field-name">cards (<code><a href="/object/card">[Card]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of cards that reference this token.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="deprecationreason" class="field-name">deprecationReason (<code><a href="/scalar/string">String</a></code>)</span>
+  <span id="coloridentities" class="field-name">colorIdentities (<code><a href="/object/color">[Color]</a></code>)</span>
   <div class="description-wrapper">
+  <p>Returns a list of color identities for the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="colorindicators" class="field-name">colorIndicators (<code><a href="/object/color">[Color]</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns a list of color indicators for the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="colors" class="field-name">colors (<code><a href="/object/color">[Color]</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns a list of colors for the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="id" class="field-name">id (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the id of the magic token. The id is a 40 character alphanumeric string.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="isonlineonly" class="field-name">isOnlineOnly (<code><a href="/scalar/boolean">Boolean</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns whether the token is only available online.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="loyalty" class="field-name">loyalty (<code><a href="/scalar/int">Int</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the loyalty value of the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="magicset" class="field-name">magicSet (<code><a href="/object/magicset">MagicSet</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns information about the magic set this token is included in.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="name" class="field-name">name (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the name as printed on the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="number" class="field-name">number (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the set number of the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="power" class="field-name">power (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the power of the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="scryfallid" class="field-name">scryfallId (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the scryfall id of the token</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="side" class="field-name">side (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>If printed in a duel deck, returns the side of the duel deck its printed in.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="text" class="field-name">text (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the text inside of the rules box on the token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="tokentype" class="field-name">tokenType (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the token type as printed on the magic token. The token type includes
+the subtype, supertype, and type of the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="toughness" class="field-name">toughness (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the toughness of the magic token.</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="watermark" class="field-name">watermark (<code><a href="/scalar/string">String</a></code>)</span>
+  <div class="description-wrapper">
+  <p>Returns the watermark on the magic token. If there is no watermark, this field returns null.</p>
   </div>
 </div>
 

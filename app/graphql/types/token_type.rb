@@ -77,4 +77,8 @@ Types::TokenType = GraphQL::ObjectType.define do
   field :colors, types[Types::ColorType],
         'Returns a list of colors for the magic token.',
         property: :colors
+
+  field :cards, types[Types::CardType],
+        'Returns a list of cards that reference this token.',
+        property: :cards
 end

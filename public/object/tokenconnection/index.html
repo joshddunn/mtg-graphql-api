@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="__EnumValue GraphQL documentation">
+    <meta name="description" content="TokenConnection GraphQL documentation">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>MTGQL | __enumvalue</title>
+    <title>MTGQL | Tokenconnection</title>
     <link rel="stylesheet" href="/assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
     <script>
@@ -343,28 +343,26 @@
       <div id="content">
 
         <h1>
-<a id="__enumvalue" class="anchor" href="#__enumvalue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>__EnumValue</h1>
-<p>One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.</p>
+<a id="tokenconnection" class="anchor" href="#tokenconnection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TokenConnection</h1>
+<p>Returns paginated information about magic the gathering tokens.</p>
 <h2>
 <a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
 <div class="field-entry ">
-  <span id="name" class="field-name">name (<code><a href="/scalar/string">String!</a></code>)</span>
+  <span id="edges" class="field-name">edges (<code><a href="/object/tokenedge">[TokenEdge]</a></code>)</span>
   <div class="description-wrapper">
+  <p>A list of edges.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="description" class="field-name">description (<code><a href="/scalar/string">String</a></code>)</span>
+  <span id="pageinfo" class="field-name">pageInfo (<code><a href="/object/pageinfo">PageInfo!</a></code>)</span>
   <div class="description-wrapper">
+  <p>Information to aid in pagination.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="isdeprecated" class="field-name">isDeprecated (<code><a href="/scalar/boolean">Boolean!</a></code>)</span>
+  <span id="totalcount" class="field-name">totalCount (<code><a href="/scalar/int">Int</a></code>)</span>
   <div class="description-wrapper">
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="deprecationreason" class="field-name">deprecationReason (<code><a href="/scalar/string">String</a></code>)</span>
-  <div class="description-wrapper">
+  <p>Returns the total number of nodes found by the query.</p>
   </div>
 </div>
 

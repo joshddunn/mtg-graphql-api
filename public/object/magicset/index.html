@@ -114,8 +114,8 @@
       
         
       <li>
-        <a href="/object/coloridentity/" class="sidebar-link">
-          ColorIdentity
+        <a href="/object/foreigndatum/" class="sidebar-link">
+          ForeignDatum
         </a>
       </li>
       
@@ -149,6 +149,13 @@
       
         
       <li>
+        <a href="/object/ruling/" class="sidebar-link">
+          Ruling
+        </a>
+      </li>
+      
+        
+      <li>
         <a href="/object/subtype/" class="sidebar-link">
           Subtype
         </a>
@@ -158,6 +165,27 @@
       <li>
         <a href="/object/supertype/" class="sidebar-link">
           Supertype
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/token/" class="sidebar-link">
+          Token
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/tokenconnection/" class="sidebar-link">
+          TokenConnection
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/object/tokenedge/" class="sidebar-link">
+          TokenEdge
         </a>
       </li>
       
@@ -323,6 +351,63 @@
   <span id="cards" class="field-name connection-name">cards (<a href="/object/cardconnection"><code>CardConnection</code></a>)</span>
   <div class="description-wrapper">
   <p>Returns paginated information about the cards in the magic set.</p>
+     <table class="arguments">
+  <thead>
+  <tr>
+    <th>Argument</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>after</code></td>
+  <td>
+    <code><a href="/scalar/string">String</a></code>
+  </td>
+  <td>
+    <p></p>
+<p>Returns the elements in the list that come after the specified cursor.</p>
+  </td>
+  </tr>
+  <tr>
+  <td><code>before</code></td>
+  <td>
+    <code><a href="/scalar/string">String</a></code>
+  </td>
+  <td>
+    <p></p>
+<p>Returns the elements in the list that come before the specified cursor.</p>
+  </td>
+  </tr>
+  <tr>
+  <td><code>first</code></td>
+  <td>
+    <code><a href="/scalar/int">Int</a></code>
+  </td>
+  <td>
+    <p></p>
+<p>Returns the first <em>n</em> elements from the list.</p>
+  </td>
+  </tr>
+  <tr>
+  <td><code>last</code></td>
+  <td>
+    <code><a href="/scalar/int">Int</a></code>
+  </td>
+  <td>
+    <p></p>
+<p>Returns the last <em>n</em> elements from the list.</p>
+  </td>
+  </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="tokens" class="field-name connection-name">tokens (<a href="/object/tokenconnection"><code>TokenConnection</code></a>)</span>
+  <div class="description-wrapper">
+  <p>Returns paginated information about the tokens in the magic set.</p>
      <table class="arguments">
   <thead>
   <tr>

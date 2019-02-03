@@ -87,7 +87,12 @@ type Card {
   """
   Returns a list of color identities for the magic card.
   """
-  colorIdentities: [ColorIdentity]
+  colorIdentities: [Color]
+
+  """
+  Returns a list of color indicators for the magic card.
+  """
+  colorIndicators: [Color]
 
   """
   Returns a list of colors for the magic card.
@@ -113,6 +118,11 @@ type Card {
   Returns the flavour text printed on the magic card.
   """
   flavorText: String
+
+  """
+  Returns the foreign data associated with this magic card.
+  """
+  foreignData: [ForeignDatum]
 
   """
   Returns the frame effect of the card.
@@ -215,6 +225,11 @@ type Card {
   name: String
 
   """
+  Returns the names as printed on the magic card.
+  """
+  names: [String]
+
+  """
   Returns the set number of the magic card.
   """
   number: String
@@ -243,6 +258,11 @@ type Card {
   Returns the rarity of the magic card.
   """
   rarity: String
+
+  """
+  Returns the rulings associated with this magic card.
+  """
+  rulings: [Ruling]
 
   """
   Returns the scryfall id of the card
@@ -278,6 +298,11 @@ type Card {
   Returns the text inside of the rules box on the card.
   """
   text: String
+
+  """
+  Returns a list of tokens that are referenced by this card.
+  """
+  tokens: [Token]
 
   """
   Returns the toughness of the magic card.
@@ -388,13 +413,38 @@ type Color {
 }
 
 """
-Contains information about magic card color identities.
+Contains information about magic cards in other languages.
 """
-type ColorIdentity {
+type ForeignDatum {
   """
-  Returns the letter representing a color identity. This field returns either U, B, R, G, or W.
+  Returns the type of the magic card.
   """
-  identifier: String
+  cardType: String
+
+  """
+  Returns the flavor text of the magic card.
+  """
+  flavorText: String
+
+  """
+  Returns the language of the translation.
+  """
+  language: String
+
+  """
+  Returns the multiverse id of the magic card.
+  """
+  multiverseId: Int
+
+  """
+  Returns the name of the magic card.
+  """
+  name: String
+
+  """
+  Returns the text of the magic card.
+  """
+  text: String
 }
 
 scalar JSON
@@ -492,6 +542,31 @@ type MagicSet {
   Returns the tcgplayer group id of the magic set.
   """
   tcgplayerGroupId: String
+
+  """
+  Returns paginated information about the tokens in the magic set.
+  """
+  tokens(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): TokenConnection
 
   """
   Returns the total set size of the magic set.
@@ -613,11 +688,6 @@ type Query {
   ): CardConnection
 
   """
-  Returns structured information about magic card color identities.
-  """
-  ColorIdentities: [ColorIdentity]
-
-  """
   Returns structured information about magic card colors.
   """
   Colors: [Color]
@@ -669,6 +739,21 @@ type Query {
 }
 
 """
+Contains information about magic card rulings.
+"""
+type Ruling {
+  """
+  Returns the date of the ruling.
+  """
+  date: String
+
+  """
+  Returns the explanation of the ruling.
+  """
+  text: String
+}
+
+"""
 Contains information about magic card subtypes.
 """
 type Subtype {
@@ -686,6 +771,142 @@ type Supertype {
   Returns the name of the supertype. E.g., Basic, Legendary, etc.
   """
   identifier: String
+}
+
+"""
+Contains information about magic token.
+"""
+type Token {
+  """
+  Returns information about the artist who illustrated the token.
+  """
+  artist: Artist
+
+  """
+  Returns the border color of the magic token. This field will return null, black, silver, or white.
+  """
+  borderColor: String
+
+  """
+  Returns a list of cards that reference this token.
+  """
+  cards: [Card]
+
+  """
+  Returns a list of color identities for the magic token.
+  """
+  colorIdentities: [Color]
+
+  """
+  Returns a list of color indicators for the magic token.
+  """
+  colorIndicators: [Color]
+
+  """
+  Returns a list of colors for the magic token.
+  """
+  colors: [Color]
+
+  """
+  Returns the id of the magic token. The id is a 40 character alphanumeric string.
+  """
+  id: String
+
+  """
+  Returns whether the token is only available online.
+  """
+  isOnlineOnly: Boolean
+
+  """
+  Returns the loyalty value of the magic token.
+  """
+  loyalty: Int
+
+  """
+  Returns information about the magic set this token is included in.
+  """
+  magicSet: MagicSet
+
+  """
+  Returns the name as printed on the magic token.
+  """
+  name: String
+
+  """
+  Returns the set number of the magic token.
+  """
+  number: String
+
+  """
+  Returns the power of the magic token.
+  """
+  power: String
+
+  """
+  Returns the scryfall id of the token
+  """
+  scryfallId: String
+
+  """
+  If printed in a duel deck, returns the side of the duel deck its printed in.
+  """
+  side: String
+
+  """
+  Returns the text inside of the rules box on the token.
+  """
+  text: String
+
+  """
+  Returns the token type as printed on the magic token. The token type includes
+  the subtype, supertype, and type of the magic token.
+  """
+  tokenType: String
+
+  """
+  Returns the toughness of the magic token.
+  """
+  toughness: String
+
+  """
+  Returns the watermark on the magic token. If there is no watermark, this field returns null.
+  """
+  watermark: String
+}
+
+"""
+Returns paginated information about magic the gathering tokens.
+"""
+type TokenConnection {
+  """
+  A list of edges.
+  """
+  edges: [TokenEdge]
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  Returns the total number of nodes found by the query.
+  """
+  totalCount: Int
+}
+
+"""
+An edge in a connection.
+"""
+type TokenEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: Token
 }
 
 """
