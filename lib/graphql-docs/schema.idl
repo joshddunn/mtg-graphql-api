@@ -235,9 +235,19 @@ type Card {
   power: String
 
   """
+  Returns the magic sets in which a version of this card was printed.
+  """
+  printings: [MagicSet]
+
+  """
   Returns the rarity of the magic card.
   """
   rarity: String
+
+  """
+  Returns the scryfall id of the card
+  """
+  scryfallId: String
 
   """
   If printed in a duel deck, returns the side of the duel deck its printed in.

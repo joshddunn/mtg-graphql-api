@@ -19,4 +19,7 @@ class Card < ApplicationRecord
 
   has_many :variations
   has_many :variants, through: :variations, source: :card
+
+  has_many :printing_associations
+  has_many :printings, through: :printing_associations, source: :magic_set
 end
