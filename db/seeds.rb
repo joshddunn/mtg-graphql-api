@@ -17,8 +17,8 @@ card_descriptions = []
 current = 1
 total = data_hash.count
 
-data_hash.each do |key, value|
-  value.each do |set_key, set_value|
+data_hash.each do |_, value|
+  value.each do |set_key, _|
     set_keys.push set_key unless set_keys.include? set_key
   end
 
@@ -30,7 +30,7 @@ data_hash.each do |key, value|
   # card_descriptions
   if value[:boosterV3].present?
     value[:boosterV3].each do |booster|
-      if booster.kind_of? Array
+      if booster.is_a? Array
         booster.each do |b|
           card_descriptions.push b unless card_descriptions.include? b
         end
@@ -42,12 +42,12 @@ data_hash.each do |key, value|
 
   value[:cards].each do |card|
     # card keys
-    card.each do |card_key, card_value|
+    card.each do |card_key, _|
       card_keys.push card_key unless card_keys.include? card_key
     end
 
     # supertypes
-    if card[:supertypes].kind_of? Array
+    if card[:supertypes].is_a? Array
       card[:supertypes].each do |supertype|
         supertypes.push supertype unless supertypes.include? supertype
       end
@@ -57,28 +57,28 @@ data_hash.each do |key, value|
     artists.push card[:artist] unless artists.include? card[:artist]
 
     # subtypes
-    if card[:subtypes].kind_of? Array
+    if card[:subtypes].is_a? Array
       card[:subtypes].each do |subtype|
         subtypes.push subtype unless subtypes.include? subtype
       end
     end
 
     # types
-    if card[:types].kind_of? Array
+    if card[:types].is_a? Array
       card[:types].each do |type|
         types.push type unless types.include? type
       end
     end
 
     # colors
-    if card[:colors].kind_of? Array
+    if card[:colors].is_a? Array
       card[:colors].each do |color|
         colors.push color unless colors.include? color
       end
     end
 
     # color identity
-    if card[:colorIdentity].kind_of? Array
+    if card[:colorIdentity].is_a? Array
       card[:colorIdentity].each do |color_identity|
         color_identities.push color_identity unless color_identities.include? color_identity
       end
@@ -86,40 +86,39 @@ data_hash.each do |key, value|
   end
 end
 
-
 supertypes.sort.each_with_index do |supertype, i|
-  Supertype.create(id: i+1, identifier: supertype)
+  Supertype.create(id: i + 1, identifier: supertype)
 end
 
 artists.sort.each_with_index do |artist, i|
-  Artist.create(id: i+1, identifier: artist)
+  Artist.create(id: i + 1, identifier: artist)
 end
 
 subtypes.sort.each_with_index do |subtype, i|
-  Subtype.create(id: i+1, identifier: subtype)
+  Subtype.create(id: i + 1, identifier: subtype)
 end
 
 types.sort.each_with_index do |type, i|
-  Type.create(id: i+1, identifier: type)
+  Type.create(id: i + 1, identifier: type)
 end
 
 colors.sort.each_with_index do |color, i|
-  Color.create(id: i+1, identifier: color)
+  Color.create(id: i + 1, identifier: color)
 end
 
 color_identities.sort.each_with_index do |color_identity, i|
-  ColorIdentity.create(id: i+1, identifier: color_identity)
+  ColorIdentity.create(id: i + 1, identifier: color_identity)
 end
 
 blocks.sort.each_with_index do |block, i|
-  Block.create(id: i+1, identifier: block)
+  Block.create(id: i + 1, identifier: block)
 end
 
 card_descriptions.sort.each_with_index do |description, i|
-  CardDescription.create(id: i+1, identifier: description)
+  CardDescription.create(id: i + 1, identifier: description)
 end
 
-puts "Phase 1 seeding is complete"
+puts 'Phase 1 seeding is complete'
 
 data_hash.each do |key, value|
   set = MagicSet.create(
@@ -142,7 +141,7 @@ data_hash.each do |key, value|
   # enter in booster information
   if value[:boosterV3].present?
     value[:boosterV3].each_with_index do |v, index|
-      if v.kind_of? Array
+      if v.is_a? Array
         v.each do |vv|
           Booster.new(magic_set_id: set.id, position: index + 1,
                       card_description_id: CardDescription.where(identifier: vv).first.id).save!
@@ -298,9 +297,9 @@ data_hash.each do |key, value|
   current += 1
 end
 
-puts "Phase 2 seeding is complete"
+puts 'Phase 2 seeding is complete'
 
-data_hash.each do |key, value|
+data_hash.each do |_, value|
   information = []
   value[:cards].each do |card|
     # variation assoc
@@ -316,4 +315,4 @@ data_hash.each do |key, value|
   Variation.import information, validate: false
 end
 
-puts "Phase 3 seeding is complete"
+puts 'Phase 3 seeding is complete'
