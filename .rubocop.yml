@@ -1,22 +1,41 @@
 AllCops:
   TargetRubyVersion: 2.4.2
+
 Metrics/ModuleLength:
   Enabled: false
+
 Metrics/BlockLength:
   Enabled: false
+
 Metrics/LineLength:
   Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
+
 Style/SymbolArray:
   Enabled: false
+
 Bundler/OrderedGems:
   Enabled: false
+
 Metrics/CyclomaticComplexity:
   Enabled: false
+
 Metrics/AbcSize:
   Enabled: false
+
 Performance/StringReplacement:
   Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
 Rails:
   Enabled: true
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::AlternativeNameType = GraphQL::ObjectType.define do
   name 'AlternativeName'
   description 'Contains information about an alternative name for a magic set.'

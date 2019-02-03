@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::ArtistType = GraphQL::ObjectType.define do
   name 'Artist'
   description 'Contains information about an artist ' \

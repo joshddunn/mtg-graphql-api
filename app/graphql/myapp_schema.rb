@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 MyappSchema = GraphQL::Schema.define do
   # mutation(Types::MutationType)
   query(Types::QueryType)

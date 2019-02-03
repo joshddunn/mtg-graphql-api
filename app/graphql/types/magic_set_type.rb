@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::MagicSetType = GraphQL::ObjectType.define do
   name 'MagicSet'
   description 'Contains information about a magic the gathering set.'

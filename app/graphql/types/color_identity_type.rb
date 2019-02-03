@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::ColorIdentityType = GraphQL::ObjectType.define do
   name 'ColorIdentity'
   description 'Contains information about magic card color identities.'

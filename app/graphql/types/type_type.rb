@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Types::TypeType = GraphQL::ObjectType.define do
   name 'Type'
   description 'Contains information about the type of a magic card.'
