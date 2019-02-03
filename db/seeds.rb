@@ -85,6 +85,10 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
           end
         end
       end
+
+      value[:tokens].each do |card|
+        artists.push card[:artist] if card[:artist] && !artists.include?(card[:artist])
+      end
     end
 
     supertypes.sort.each_with_index do |supertype, i|
@@ -226,6 +230,27 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       ruling_information = []
       foreign_datum_information = []
 
+      information = value[:tokens].map do |token|
+        Token.new(
+          identifier: token[:uuid],
+          magic_set_id: set.id,
+          artist_id: Artist.where(identifier: token[:artist]).first&.id,
+          border_color: token[:borderColor],
+          is_online_only: token[:isOnlineOnly] ? true : false,
+          loyalty: token[:loyalty],
+          name: token[:name],
+          number: token[:number],
+          power: token[:power],
+          scryfall_id: token[:scryfallId],
+          side: token[:side],
+          text: token[:text],
+          toughness: token[:toughness],
+          token_type: token[:type],
+          watermark: token[:watermark]
+        )
+      end
+      Token.import information, validate: false
+
       value[:cards].each do |card|
         # color identity assoc
         if card[:colorIdentity].present?
@@ -330,6 +355,48 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       SubtypeAssociation.import subtype_information, validate: false
       Ruling.import ruling_information, validate: false
       ForeignDatum.import foreign_datum_information, validate: false
+
+      color_identity_information = []
+      color_indicator_information = []
+      color_information = []
+
+      value[:tokens].each do |card|
+        # color identity assoc
+        if card[:colorIdentity].present?
+          info = Token.find_by(identifier: card[:uuid])
+          card[:colorIdentity].each do |color_identity|
+            color_identity_information.push TokenColorIdentityAssociation.new(
+              token_id: info.id,
+              color_id: Color.where(identifier: color_identity).first.id
+            )
+          end
+        end
+
+        # color indicator assoc
+        if card[:colorIndicator].present?
+          info = Token.find_by(identifier: card[:uuid])
+          card[:colorIndicator].each do |color_indicator|
+            color_indicator_information.push TokenColorIndicatorAssociation.new(
+              token_id: info.id,
+              color_id: Color.where(identifier: color_indicator).first.id
+            )
+          end
+        end
+
+        # color assoc
+        if card[:colors].present?
+          info = Token.find_by(identifier: card[:uuid])
+          card[:colors].each do |color|
+            color_information.push TokenColorAssociation.new(
+              token_id: info.id,
+              color_id: Color.where(identifier: color).first.id
+            )
+          end
+        end
+      end
+      TokenColorIdentityAssociation.import color_identity_information, validate: false
+      TokenColorIndicatorAssociation.import color_indicator_information, validate: false
+      TokenColorAssociation.import color_information, validate: false
 
       puts "P2 -- #{key} (#{current} of #{total})"
       current += 1

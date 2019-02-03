@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_072314) do
+ActiveRecord::Schema.define(version: 2019_02_03_080831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,56 @@ ActiveRecord::Schema.define(version: 2019_02_03_072314) do
     t.index ["identifier"], name: "index_supertypes_on_identifier"
   end
 
+  create_table "token_color_associations", force: :cascade do |t|
+    t.bigint "token_id"
+    t.bigint "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_token_color_associations_on_color_id"
+    t.index ["token_id"], name: "index_token_color_associations_on_token_id"
+  end
+
+  create_table "token_color_identity_associations", force: :cascade do |t|
+    t.bigint "token_id"
+    t.bigint "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_token_color_identity_associations_on_color_id"
+    t.index ["token_id"], name: "index_token_color_identity_associations_on_token_id"
+  end
+
+  create_table "token_color_indicator_associations", force: :cascade do |t|
+    t.bigint "token_id"
+    t.bigint "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_token_color_indicator_associations_on_color_id"
+    t.index ["token_id"], name: "index_token_color_indicator_associations_on_token_id"
+  end
+
+  create_table "tokens", force: :cascade do |t|
+    t.bigint "artist_id"
+    t.bigint "magic_set_id"
+    t.string "border_color"
+    t.boolean "is_online_only"
+    t.string "loyalty"
+    t.string "name"
+    t.string "number"
+    t.string "power"
+    t.string "scryfall_id"
+    t.string "side"
+    t.string "text"
+    t.string "toughness"
+    t.string "token_type"
+    t.string "identifier"
+    t.string "watermark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_tokens_on_artist_id"
+    t.index ["identifier"], name: "index_tokens_on_identifier"
+    t.index ["magic_set_id"], name: "index_tokens_on_magic_set_id"
+  end
+
   create_table "translations", force: :cascade do |t|
     t.bigint "magic_set_id"
     t.string "code"
@@ -284,6 +334,14 @@ ActiveRecord::Schema.define(version: 2019_02_03_072314) do
   add_foreign_key "subtype_associations", "subtypes"
   add_foreign_key "supertype_associations", "cards"
   add_foreign_key "supertype_associations", "supertypes"
+  add_foreign_key "token_color_associations", "colors"
+  add_foreign_key "token_color_associations", "tokens"
+  add_foreign_key "token_color_identity_associations", "colors"
+  add_foreign_key "token_color_identity_associations", "tokens"
+  add_foreign_key "token_color_indicator_associations", "colors"
+  add_foreign_key "token_color_indicator_associations", "tokens"
+  add_foreign_key "tokens", "artists"
+  add_foreign_key "tokens", "magic_sets"
   add_foreign_key "translations", "magic_sets"
   add_foreign_key "type_associations", "cards"
   add_foreign_key "type_associations", "types"

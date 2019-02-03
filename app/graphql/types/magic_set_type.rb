@@ -74,4 +74,8 @@ Types::MagicSetType = GraphQL::ObjectType.define do
   connection :cards, Types::CardConnectionType,
              'Returns paginated information about the cards in the magic set.',
              property: :cards
+
+  connection :tokens, Types::TokenConnectionType,
+             'Returns paginated information about the tokens in the magic set.',
+             property: :tokens
 end
