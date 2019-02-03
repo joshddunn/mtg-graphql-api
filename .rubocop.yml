@@ -10,6 +10,7 @@ AllCops:
     - 'bin/rails'
     - 'db/schema.rb'
     - 'lib/graphql-types/build_types.rb'
+    - 'vendor/**/*'
 
 Metrics/ModuleLength:
   Enabled: false
