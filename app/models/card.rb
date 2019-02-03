@@ -22,4 +22,6 @@ class Card < ApplicationRecord
 
   has_many :printing_associations
   has_many :printings, through: :printing_associations, source: :magic_set
+
+  has_many :rulings
 end

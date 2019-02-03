@@ -191,4 +191,8 @@ Types::CardType = GraphQL::ObjectType.define do
   field :printings, types[Types::MagicSetType],
         'Returns the magic sets in which a version of this card was printed.',
         property: :printings
+
+  field :rulings, types[Types::RulingType],
+        'Returns the rulings associated with this magic card.',
+        property: :rulings
 end

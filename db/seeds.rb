@@ -233,6 +233,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       subtype_information = []
       supertype_information = []
       type_information = []
+      ruling_information = []
 
       value[:cards].each do |card|
         # color identity assoc
@@ -289,6 +290,18 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
             )
           end
         end
+
+        # ruling assoc
+        if card[:rulings].present?
+          info = Card.find_by(identifier: card[:uuid])
+          card[:rulings].each do |ruling|
+            ruling_information.push Ruling.new(
+              card_id: info.id,
+              date: ruling[:date],
+              text: ruling[:text]
+            )
+          end
+        end
       end
 
       ColorIdentityAssociation.import color_identity_information, validate: false
@@ -296,6 +309,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       TypeAssociation.import type_information, validate: false
       SupertypeAssociation.import supertype_information, validate: false
       SubtypeAssociation.import subtype_information, validate: false
+      Ruling.import ruling_information, validate: false
 
       puts "P2 -- #{key} (#{current} of #{total})"
       current += 1
@@ -304,7 +318,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
     puts 'Phase 2 seeding is complete'
 
     current = 1
-    data_hash.each do |_, value|
+    data_hash.each do |key, value|
       variation_information = []
       printing_information = []
 
@@ -319,6 +333,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
           end
         end
 
+        # printing assoc
         if card[:printings].present?
           info = Card.find_by(identifier: card[:uuid])
           card[:printings].each do |code|

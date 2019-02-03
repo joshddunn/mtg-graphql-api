@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_043709) do
+ActiveRecord::Schema.define(version: 2019_02_03_053403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,15 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
     t.index ["magic_set_id"], name: "index_printing_associations_on_magic_set_id"
   end
 
+  create_table "rulings", force: :cascade do |t|
+    t.bigint "card_id"
+    t.date "date"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_rulings_on_card_id"
+  end
+
   create_table "subtype_associations", force: :cascade do |t|
     t.bigint "card_id"
     t.bigint "subtype_id"
@@ -251,6 +260,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
   add_foreign_key "magic_sets", "blocks"
   add_foreign_key "printing_associations", "cards"
   add_foreign_key "printing_associations", "magic_sets"
+  add_foreign_key "rulings", "cards"
   add_foreign_key "subtype_associations", "cards"
   add_foreign_key "subtype_associations", "subtypes"
   add_foreign_key "supertype_associations", "cards"
