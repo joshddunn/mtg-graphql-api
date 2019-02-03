@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flavor_text: MyString
+  language: MyString
+  multiverse_id: 1
+  name: MyString
+  text: MyString
+  card_type: MyString
+  card: one
+
+two:
+  flavor_text: MyString
+  language: MyString
+  multiverse_id: 1
+  name: MyString
+  text: MyString
+  card_type: MyString
+  card: two

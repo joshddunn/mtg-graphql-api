@@ -195,4 +195,8 @@ Types::CardType = GraphQL::ObjectType.define do
   field :rulings, types[Types::RulingType],
         'Returns the rulings associated with this magic card.',
         property: :rulings
+
+  field :foreignData, types[Types::ForeignDatumType],
+        'Returns the foreign data associated with this magic card.',
+        property: :foreign_data
 end
