@@ -17,7 +17,6 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
     subtypes = []
     types = []
     colors = []
-    color_identities = []
     set_keys = []
     card_keys = []
     blocks = []
@@ -85,13 +84,6 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
             colors.push color unless colors.include? color
           end
         end
-
-        # color identity
-        if card[:colorIdentity].is_a? Array
-          card[:colorIdentity].each do |color_identity|
-            color_identities.push color_identity unless color_identities.include? color_identity
-          end
-        end
       end
     end
 
@@ -113,10 +105,6 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
 
     colors.sort.each_with_index do |color, i|
       Color.create(id: i + 1, identifier: color)
-    end
-
-    color_identities.sort.each_with_index do |color_identity, i|
-      ColorIdentity.create(id: i + 1, identifier: color_identity)
     end
 
     blocks.sort.each_with_index do |block, i|
@@ -243,7 +231,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
           card[:colorIdentity].each do |color_identity|
             color_identity_information.push ColorIdentityAssociation.new(
               card_id: info.id,
-              color_identity_id: ColorIdentity.where(identifier: color_identity).first.id
+              color_id: Color.where(identifier: color_identity).first.id
             )
           end
         end

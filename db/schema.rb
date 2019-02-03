@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_062737) do
+ActiveRecord::Schema.define(version: 2019_02_03_070557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,20 +111,13 @@ ActiveRecord::Schema.define(version: 2019_02_03_062737) do
     t.index ["color_id"], name: "index_color_associations_on_color_id"
   end
 
-  create_table "color_identities", force: :cascade do |t|
-    t.string "identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["identifier"], name: "index_color_identities_on_identifier"
-  end
-
   create_table "color_identity_associations", force: :cascade do |t|
     t.bigint "card_id"
-    t.bigint "color_identity_id"
+    t.bigint "color_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_color_identity_associations_on_card_id"
-    t.index ["color_identity_id"], name: "index_color_identity_associations_on_color_identity_id"
+    t.index ["color_id"], name: "index_color_identity_associations_on_color_id"
   end
 
   create_table "colors", force: :cascade do |t|
@@ -268,7 +261,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_062737) do
   add_foreign_key "color_associations", "cards"
   add_foreign_key "color_associations", "colors"
   add_foreign_key "color_identity_associations", "cards"
-  add_foreign_key "color_identity_associations", "color_identities"
+  add_foreign_key "color_identity_associations", "colors"
   add_foreign_key "foreign_data", "cards"
   add_foreign_key "magic_rarities_codes", "magic_sets"
   add_foreign_key "magic_sets", "blocks"
