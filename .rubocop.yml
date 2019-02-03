@@ -12,6 +12,10 @@ AllCops:
     - 'lib/graphql-types/build_types.rb'
     - 'vendor/**/*'
 
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'db/migrate/20190203032704_add_indexes_for_seeds.rb'
+
 Metrics/ModuleLength:
   Enabled: false
 
