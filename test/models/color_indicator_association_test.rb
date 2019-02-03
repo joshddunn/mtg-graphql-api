@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MagicRaritiesCodeTest < ActiveSupport::TestCase
+class ColorIndicatorAssociationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

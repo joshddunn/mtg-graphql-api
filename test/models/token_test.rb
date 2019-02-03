@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ColorIdentityTest < ActiveSupport::TestCase
+class TokenTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

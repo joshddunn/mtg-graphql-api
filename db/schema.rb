@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_043709) do
+ActiveRecord::Schema.define(version: 2019_02_03_080831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "alternative_names", force: :cascade do |t|
-    t.bigint "magic_set_id"
-    t.string "identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["identifier"], name: "index_alternative_names_on_identifier"
-    t.index ["magic_set_id"], name: "index_alternative_names_on_magic_set_id"
-  end
 
   create_table "artists", force: :cascade do |t|
     t.string "identifier"
@@ -97,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
     t.string "side"
     t.string "tcgplayer_product_id"
     t.string "scryfall_id"
+    t.jsonb "names"
     t.index ["artist_id"], name: "index_cards_on_artist_id"
     t.index ["identifier"], name: "index_cards_on_identifier"
     t.index ["magic_set_id"], name: "index_cards_on_magic_set_id"
@@ -111,20 +103,22 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
     t.index ["color_id"], name: "index_color_associations_on_color_id"
   end
 
-  create_table "color_identities", force: :cascade do |t|
-    t.string "identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["identifier"], name: "index_color_identities_on_identifier"
-  end
-
   create_table "color_identity_associations", force: :cascade do |t|
     t.bigint "card_id"
-    t.bigint "color_identity_id"
+    t.bigint "color_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_color_identity_associations_on_card_id"
-    t.index ["color_identity_id"], name: "index_color_identity_associations_on_color_identity_id"
+    t.index ["color_id"], name: "index_color_identity_associations_on_color_id"
+  end
+
+  create_table "color_indicator_associations", force: :cascade do |t|
+    t.bigint "card_id"
+    t.bigint "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_color_indicator_associations_on_card_id"
+    t.index ["color_id"], name: "index_color_indicator_associations_on_color_id"
   end
 
   create_table "colors", force: :cascade do |t|
@@ -134,12 +128,17 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
     t.index ["identifier"], name: "index_colors_on_identifier"
   end
 
-  create_table "magic_rarities_codes", force: :cascade do |t|
-    t.bigint "magic_set_id"
-    t.string "identifier"
+  create_table "foreign_data", force: :cascade do |t|
+    t.string "flavor_text"
+    t.string "language"
+    t.integer "multiverse_id"
+    t.string "name"
+    t.string "text"
+    t.string "card_type"
+    t.bigint "card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["magic_set_id"], name: "index_magic_rarities_codes_on_magic_set_id"
+    t.index ["card_id"], name: "index_foreign_data_on_card_id"
   end
 
   create_table "magic_sets", force: :cascade do |t|
@@ -170,6 +169,15 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_printing_associations_on_card_id"
     t.index ["magic_set_id"], name: "index_printing_associations_on_magic_set_id"
+  end
+
+  create_table "rulings", force: :cascade do |t|
+    t.bigint "card_id"
+    t.date "date"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_rulings_on_card_id"
   end
 
   create_table "subtype_associations", force: :cascade do |t|
@@ -204,13 +212,54 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
     t.index ["identifier"], name: "index_supertypes_on_identifier"
   end
 
-  create_table "translations", force: :cascade do |t|
-    t.bigint "magic_set_id"
-    t.string "code"
-    t.string "identifier"
+  create_table "token_color_associations", force: :cascade do |t|
+    t.bigint "token_id"
+    t.bigint "color_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["magic_set_id"], name: "index_translations_on_magic_set_id"
+    t.index ["color_id"], name: "index_token_color_associations_on_color_id"
+    t.index ["token_id"], name: "index_token_color_associations_on_token_id"
+  end
+
+  create_table "token_color_identity_associations", force: :cascade do |t|
+    t.bigint "token_id"
+    t.bigint "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_token_color_identity_associations_on_color_id"
+    t.index ["token_id"], name: "index_token_color_identity_associations_on_token_id"
+  end
+
+  create_table "token_color_indicator_associations", force: :cascade do |t|
+    t.bigint "token_id"
+    t.bigint "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_token_color_indicator_associations_on_color_id"
+    t.index ["token_id"], name: "index_token_color_indicator_associations_on_token_id"
+  end
+
+  create_table "tokens", force: :cascade do |t|
+    t.bigint "artist_id"
+    t.bigint "magic_set_id"
+    t.string "border_color"
+    t.boolean "is_online_only"
+    t.string "loyalty"
+    t.string "name"
+    t.string "number"
+    t.string "power"
+    t.string "scryfall_id"
+    t.string "side"
+    t.string "text"
+    t.string "toughness"
+    t.string "token_type"
+    t.string "identifier"
+    t.string "watermark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_tokens_on_artist_id"
+    t.index ["identifier"], name: "index_tokens_on_identifier"
+    t.index ["magic_set_id"], name: "index_tokens_on_magic_set_id"
   end
 
   create_table "type_associations", force: :cascade do |t|
@@ -238,7 +287,6 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
     t.index ["variation_id"], name: "index_variations_on_variation_id"
   end
 
-  add_foreign_key "alternative_names", "magic_sets"
   add_foreign_key "boosters", "card_descriptions"
   add_foreign_key "boosters", "magic_sets"
   add_foreign_key "cards", "artists"
@@ -246,16 +294,26 @@ ActiveRecord::Schema.define(version: 2019_02_03_043709) do
   add_foreign_key "color_associations", "cards"
   add_foreign_key "color_associations", "colors"
   add_foreign_key "color_identity_associations", "cards"
-  add_foreign_key "color_identity_associations", "color_identities"
-  add_foreign_key "magic_rarities_codes", "magic_sets"
+  add_foreign_key "color_identity_associations", "colors"
+  add_foreign_key "color_indicator_associations", "cards"
+  add_foreign_key "color_indicator_associations", "colors"
+  add_foreign_key "foreign_data", "cards"
   add_foreign_key "magic_sets", "blocks"
   add_foreign_key "printing_associations", "cards"
   add_foreign_key "printing_associations", "magic_sets"
+  add_foreign_key "rulings", "cards"
   add_foreign_key "subtype_associations", "cards"
   add_foreign_key "subtype_associations", "subtypes"
   add_foreign_key "supertype_associations", "cards"
   add_foreign_key "supertype_associations", "supertypes"
-  add_foreign_key "translations", "magic_sets"
+  add_foreign_key "token_color_associations", "colors"
+  add_foreign_key "token_color_associations", "tokens"
+  add_foreign_key "token_color_identity_associations", "colors"
+  add_foreign_key "token_color_identity_associations", "tokens"
+  add_foreign_key "token_color_indicator_associations", "colors"
+  add_foreign_key "token_color_indicator_associations", "tokens"
+  add_foreign_key "tokens", "artists"
+  add_foreign_key "tokens", "magic_sets"
   add_foreign_key "type_associations", "cards"
   add_foreign_key "type_associations", "types"
   add_foreign_key "variations", "cards"

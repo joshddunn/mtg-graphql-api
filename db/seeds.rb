@@ -17,7 +17,6 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
     subtypes = []
     types = []
     colors = []
-    color_identities = []
     set_keys = []
     card_keys = []
     blocks = []
@@ -85,13 +84,10 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
             colors.push color unless colors.include? color
           end
         end
+      end
 
-        # color identity
-        if card[:colorIdentity].is_a? Array
-          card[:colorIdentity].each do |color_identity|
-            color_identities.push color_identity unless color_identities.include? color_identity
-          end
-        end
+      value[:tokens].each do |card|
+        artists.push card[:artist] if card[:artist] && !artists.include?(card[:artist])
       end
     end
 
@@ -113,10 +109,6 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
 
     colors.sort.each_with_index do |color, i|
       Color.create(id: i + 1, identifier: color)
-    end
-
-    color_identities.sort.each_with_index do |color_identity, i|
-      ColorIdentity.create(id: i + 1, identifier: color_identity)
     end
 
     blocks.sort.each_with_index do |block, i|
@@ -162,27 +154,6 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
         end
       end
 
-      # alternate names
-      # if value[:names].present?
-      #   value[:names].each do |name|
-      #     AlternativeName.new(magic_set_id: set.id, identifier: name).save!
-      #   end
-      # end
-
-      # magic rarities code
-      # if value[:magicRaritiesCodes].present?
-      #   value[:magicRaritiesCodes].each do |code|
-      #     MagicRaritiesCode.new(magic_set_id: set.id, identifier: code).save!
-      #   end
-      # end
-
-      # translation
-      # if value[:translations].present?
-      #   value[:translations].each do |code, identifier|
-      #     Translation.new(magic_set_id: set.id, code: code, identifier: identifier).save!
-      #   end
-      # end
-
       # cards
       information = value[:cards].map do |card|
         Card.new(
@@ -219,6 +190,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
           is_online_only: card[:isOnlineOnly] ? true : false,
           is_oversized: card[:isOversized] ? true : false,
           legalities: card[:legalities],
+          names: card[:names],
           original_text: card[:originalText],
           original_type: card[:originalType],
           side: card[:side],
@@ -229,10 +201,34 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       Card.import information, validate: false
 
       color_identity_information = []
+      color_indicator_information = []
       color_information = []
       subtype_information = []
       supertype_information = []
       type_information = []
+      ruling_information = []
+      foreign_datum_information = []
+
+      information = value[:tokens].map do |token|
+        Token.new(
+          identifier: token[:uuid],
+          magic_set_id: set.id,
+          artist_id: Artist.where(identifier: token[:artist]).first&.id,
+          border_color: token[:borderColor],
+          is_online_only: token[:isOnlineOnly] ? true : false,
+          loyalty: token[:loyalty],
+          name: token[:name],
+          number: token[:number],
+          power: token[:power],
+          scryfall_id: token[:scryfallId],
+          side: token[:side],
+          text: token[:text],
+          toughness: token[:toughness],
+          token_type: token[:type],
+          watermark: token[:watermark]
+        )
+      end
+      Token.import information, validate: false
 
       value[:cards].each do |card|
         # color identity assoc
@@ -241,7 +237,18 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
           card[:colorIdentity].each do |color_identity|
             color_identity_information.push ColorIdentityAssociation.new(
               card_id: info.id,
-              color_identity_id: ColorIdentity.where(identifier: color_identity).first.id
+              color_id: Color.where(identifier: color_identity).first.id
+            )
+          end
+        end
+
+        # color indicator assoc
+        if card[:colorIndicator].present?
+          info = Card.find_by(identifier: card[:uuid])
+          card[:colorIndicator].each do |color_indicator|
+            color_indicator_information.push ColorIndicatorAssociation.new(
+              card_id: info.id,
+              color_id: Color.where(identifier: color_indicator).first.id
             )
           end
         end
@@ -289,13 +296,86 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
             )
           end
         end
+
+        # ruling assoc
+        if card[:rulings].present?
+          info = Card.find_by(identifier: card[:uuid])
+          card[:rulings].each do |ruling|
+            ruling_information.push Ruling.new(
+              card_id: info.id,
+              date: ruling[:date],
+              text: ruling[:text]
+            )
+          end
+        end
+
+        # foreign datum assoc
+        if card[:foreignData].present?
+          info = Card.find_by(identifier: card[:uuid])
+          card[:foreignData].each do |foreign_data|
+            foreign_datum_information.push ForeignDatum.new(
+              card_id: info.id,
+              flavor_text: foreign_data[:flavorText],
+              language: foreign_data[:language],
+              multiverse_id: foreign_data[:multiverseId],
+              name: foreign_data[:name],
+              text: foreign_data[:text],
+              card_type: foreign_data[:type]
+            )
+          end
+        end
       end
 
       ColorIdentityAssociation.import color_identity_information, validate: false
+      ColorIndicatorAssociation.import color_indicator_information, validate: false
       ColorAssociation.import color_information, validate: false
       TypeAssociation.import type_information, validate: false
       SupertypeAssociation.import supertype_information, validate: false
       SubtypeAssociation.import subtype_information, validate: false
+      Ruling.import ruling_information, validate: false
+      ForeignDatum.import foreign_datum_information, validate: false
+
+      color_identity_information = []
+      color_indicator_information = []
+      color_information = []
+
+      value[:tokens].each do |card|
+        # color identity assoc
+        if card[:colorIdentity].present?
+          info = Token.find_by(identifier: card[:uuid])
+          card[:colorIdentity].each do |color_identity|
+            color_identity_information.push TokenColorIdentityAssociation.new(
+              token_id: info.id,
+              color_id: Color.where(identifier: color_identity).first.id
+            )
+          end
+        end
+
+        # color indicator assoc
+        if card[:colorIndicator].present?
+          info = Token.find_by(identifier: card[:uuid])
+          card[:colorIndicator].each do |color_indicator|
+            color_indicator_information.push TokenColorIndicatorAssociation.new(
+              token_id: info.id,
+              color_id: Color.where(identifier: color_indicator).first.id
+            )
+          end
+        end
+
+        # color assoc
+        if card[:colors].present?
+          info = Token.find_by(identifier: card[:uuid])
+          card[:colors].each do |color|
+            color_information.push TokenColorAssociation.new(
+              token_id: info.id,
+              color_id: Color.where(identifier: color).first.id
+            )
+          end
+        end
+      end
+      TokenColorIdentityAssociation.import color_identity_information, validate: false
+      TokenColorIndicatorAssociation.import color_indicator_information, validate: false
+      TokenColorAssociation.import color_information, validate: false
 
       puts "P2 -- #{key} (#{current} of #{total})"
       current += 1
@@ -304,26 +384,27 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
     puts 'Phase 2 seeding is complete'
 
     current = 1
-    data_hash.each do |_, value|
+    data_hash.each do |key, value|
       variation_information = []
       printing_information = []
 
       value[:cards].each do |card|
+        id = Card.where(identifier: card[:uuid]).first.id
         # variation assoc
         if card[:variations].present?
           card[:variations].each do |variation|
             variation_information.push Variation.new(
-              card_id: Card.where(identifier: card[:uuid]).first.id,
+              card_id: id,
               variation_id: Card.where(identifier: variation).first.id
             )
           end
         end
 
+        # printing assoc
         if card[:printings].present?
-          info = Card.find_by(identifier: card[:uuid])
           card[:printings].each do |code|
             printing_information.push PrintingAssociation.new(
-              card_id: info.id,
+              card_id: id,
               magic_set_id: MagicSet.where(code: code).first.id
             )
           end

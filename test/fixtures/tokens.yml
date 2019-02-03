@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  artist: one
+  border_color: MyString
+  is_online_only: false
+  loyalty: MyString
+  name: MyString
+  number: MyString
+  power: MyString
+  scryfall_id: MyString
+  side: MyString
+  text: MyString
+  toughness: MyString
+  token_type:
+  identifier: MyString
+  watermark: MyString
+
+two:
+  artist: two
+  border_color: MyString
+  is_online_only: false
+  loyalty: MyString
+  name: MyString
+  number: MyString
+  power: MyString
+  scryfall_id: MyString
+  side: MyString
+  text: MyString
+  toughness: MyString
+  token_type:
+  identifier: MyString
+  watermark: MyString

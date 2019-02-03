@@ -31,21 +31,9 @@ Types::MagicSetType = GraphQL::ObjectType.define do
         'Returns information about the block the magic set is a part of.',
         property: :block
 
-  # field :alternativeNames, types[Types::AlternativeNameType],
-  #       'Returns a list of alternative names for the magic set.',
-  #       property: :alternative_names
-
   field :booster, types[Types::BoosterType],
         'Returns the structure of a booster pack in this magic set.',
         property: :boosters
-
-  # field :magicRaritiesCodes, types[Types::MagicRaritiesCodeType],
-  #       'Returns a list of magic rarity codes for the magic set.',
-  #       property: :magic_rarities_codes
-
-  # field :translations, types[Types::TranslationType],
-  #       'Returns a list of translations for the name of the magic set.',
-  #       property: :translations
 
   field :baseSetSize, types.Int,
         'Returns base set size of the magic set.',
@@ -74,4 +62,8 @@ Types::MagicSetType = GraphQL::ObjectType.define do
   connection :cards, Types::CardConnectionType,
              'Returns paginated information about the cards in the magic set.',
              property: :cards
+
+  connection :tokens, Types::TokenConnectionType,
+             'Returns paginated information about the tokens in the magic set.',
+             property: :tokens
 end
