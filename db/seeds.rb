@@ -1,6 +1,6 @@
 require 'json'
 
-file = File.read('db/data/3.19.2.json')
+file = File.read('db/data/4.2.1.json')
 data_hash = JSON.parse(file, symbolize_names: true)
 
 artists = []
@@ -28,8 +28,8 @@ data_hash.each do |key, value|
   end
 
   # card_descriptions
-  if value[:booster].present?
-    value[:booster].each do |booster|
+  if value[:boosterV3].present?
+    value[:boosterV3].each do |booster|
       if booster.kind_of? Array
         booster.each do |b|
           card_descriptions.push b unless card_descriptions.include? b
@@ -125,21 +125,23 @@ data_hash.each do |key, value|
   set = MagicSet.create(
     name: value[:name],
     code: value[:code],
+    code_v3: value[:codeV3],
     release_date: value[:releaseDate],
-    border: value[:border],
     set_type: value[:type],
-    mkm_name: value[:mkm_name],
-    mkm_id: value[:mkm_id],
-    magic_cards_info_code: value[:magicCardsInfoCode],
-    gatherer_code: value[:gathererCode],
-    old_code: value[:oldCode],
-    online_only: value[:onlineOnly],
+    is_online_only: value[:isOnlineOnly] ? true : false,
+    is_foil_only: value[:isFoilOnly] ? true : false,
+    base_set_size: value[:baseSetSize],
+    meta_date: value.dig(:meta, :date),
+    meta_version: value.dig(:meta, :version),
+    mtgo_code: value[:mtgoCode],
+    tcgplayer_group_id: value[:tcgplayerGroupId],
+    total_set_size: value[:totalSetSize],
     block_id: value[:block].present? ? Block.where(identifier: value[:block]).first.id : nil
   )
 
   # enter in booster information
-  if value[:booster].present?
-    value[:booster].each_with_index do |v, index|
+  if value[:boosterV3].present?
+    value[:boosterV3].each_with_index do |v, index|
       if v.kind_of? Array
         v.each do |vv|
           Booster.new(magic_set_id: set.id, position: index + 1,
@@ -153,35 +155,33 @@ data_hash.each do |key, value|
   end
 
   # alternate names
-  if value[:alternativeNames].present?
-    value[:alternativeNames].each do |name|
-      AlternativeName.new(magic_set_id: set.id, identifier: name).save!
-    end
-  end
+  # if value[:names].present?
+  #   value[:names].each do |name|
+  #     AlternativeName.new(magic_set_id: set.id, identifier: name).save!
+  #   end
+  # end
 
   # magic rarities code
-  if value[:magicRaritiesCodes].present?
-    value[:magicRaritiesCodes].each do |code|
-      MagicRaritiesCode.new(magic_set_id: set.id, identifier: code).save!
-    end
-  end
+  # if value[:magicRaritiesCodes].present?
+  #   value[:magicRaritiesCodes].each do |code|
+  #     MagicRaritiesCode.new(magic_set_id: set.id, identifier: code).save!
+  #   end
+  # end
 
   # translation
-  if value[:translations].present?
-    value[:translations].each do |code, identifier|
-      Translation.new(magic_set_id: set.id, code: code, identifier: identifier).save!
-    end
-  end
+  # if value[:translations].present?
+  #   value[:translations].each do |code, identifier|
+  #     Translation.new(magic_set_id: set.id, code: code, identifier: identifier).save!
+  #   end
+  # end
 
   # cards
   information = value[:cards].map do |card|
     Card.new(
-      identifier: card[:id],
+      identifier: card[:uuid],
       magic_set_id: set.id,
       artist_id: Artist.where(identifier: card[:artist]).first.id,
-      cmc: card[:cmc],
-      multiverseid: card[:multiverseid],
-      image_name: card[:imageName],
+      converted_mana_cost: card[:convertedManaCost],
       layout: card[:layout],
       mana_cost: card[:manaCost],
       name: card[:name],
@@ -192,16 +192,29 @@ data_hash.each do |key, value|
       toughness: card[:toughness],
       card_type: card[:type],
       watermark: card[:watermark],
-      flavor: card[:flavor],
-      mci_number: card[:mciNumber],
-      border: card[:border],
-      release_date: card[:releaseDate],
+      flavor_text: card[:flavorText],
+      border_color: card[:borderColor],
       loyalty: card[:loyalty],
-      reserved: card[:reserved] ? true : false,
+      is_reserved: card[:isReserved] ? true : false,
       hand: card[:hand],
       life: card[:life],
-      timeshifted: card[:timeshifted] ? true : false,
-      starter: card[:starter] ? true : false
+      is_timeshifted: card[:isTimeshifted] ? true : false,
+      starter: card[:starter] ? true : false,
+      duel_deck: card[:duelDeck],
+      face_converted_mana_cost: card[:faceConvertedManaCost],
+      frame_effect: card[:frameEffect],
+      frame_version: card[:frameVersion],
+      has_foil: card[:hasFoil] ? true : false,
+      has_non_foil: card[:hasNonFoil] ? true : false,
+      is_alternate: card[:isAlternate] ? true : false,
+      is_foil_only: card[:isFoilOnly] ? true : false,
+      is_online_only: card[:isOnlineOnly] ? true : false,
+      is_oversized: card[:isOversized] ? true : false,
+      legalities: card[:legalities],
+      original_text: card[:originalText],
+      original_type: card[:originalType],
+      side: card[:side],
+      tcgplayer_product_id: card[:tcgplayerProductId]
     )
   end
   Card.import information, validate: false
@@ -210,7 +223,7 @@ data_hash.each do |key, value|
   value[:cards].each do |card|
     # color identity assoc
     if card[:colorIdentity].present?
-      info = Card.find_by(identifier: card[:id])
+      info = Card.find_by(identifier: card[:uuid])
       card[:colorIdentity].each do |color_identity|
         information.push ColorIdentityAssociation.new(
           card_id: info.id,
@@ -225,7 +238,7 @@ data_hash.each do |key, value|
   value[:cards].each do |card|
     # color assoc
     if card[:colors].present?
-      info = Card.find_by(identifier: card[:id])
+      info = Card.find_by(identifier: card[:uuid])
       card[:colors].each do |color|
         information.push ColorAssociation.new(
           card_id: info.id,
@@ -240,7 +253,7 @@ data_hash.each do |key, value|
   value[:cards].each do |card|
     # subtype assoc
     if card[:subtypes].present?
-      info = Card.find_by(identifier: card[:id])
+      info = Card.find_by(identifier: card[:uuid])
       card[:subtypes].each do |subtype|
         information.push SubtypeAssociation.new(
           card_id: info.id,
@@ -255,7 +268,7 @@ data_hash.each do |key, value|
   value[:cards].each do |card|
     # supertype assoc
     if card[:supertypes].present?
-      info = Card.find_by(identifier: card[:id])
+      info = Card.find_by(identifier: card[:uuid])
       card[:supertypes].each do |supertype|
         information.push SupertypeAssociation.new(
           card_id: info.id,
@@ -270,7 +283,7 @@ data_hash.each do |key, value|
   value[:cards].each do |card|
     # type assoc
     if card[:types].present?
-      info = Card.find_by(identifier: card[:id])
+      info = Card.find_by(identifier: card[:uuid])
       card[:types].each do |type|
         information.push TypeAssociation.new(
           card_id: info.id,
@@ -294,8 +307,8 @@ data_hash.each do |key, value|
     if card[:variations].present?
       card[:variations].each do |variation|
         information.push Variation.new(
-          card_id: Card.where(identifier: card[:id]).first.id,
-          variation_id: Card.where(multiverseid: variation).first.id
+          card_id: Card.where(identifier: card[:uuid]).first.id,
+          variation_id: Card.where(identifier: variation).first.id
         )
       end
     end

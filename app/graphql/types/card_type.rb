@@ -9,9 +9,9 @@ Types::CardType = GraphQL::ObjectType.define do
         'character alphanumeric string.',
         property: :identifier
 
-  field :multiverseid, types.Int,
-        'Returns the multiverseid of the magic card.',
-        property: :multiverseid
+  field :multiverseId, types.Int,
+        'Returns the multiverse id of the magic card.',
+        property: :multiverse_id
 
   field :artist, Types::ArtistType,
         'Returns information about the artist who illustrated the card.',
@@ -21,14 +21,9 @@ Types::CardType = GraphQL::ObjectType.define do
         'Returns information about the magic set this card is included in.',
         property: :magic_set
 
-  field :cmc, types.Int,
+  field :convertedManaCost, types.Int,
         'Returns the converted mana cost of the magic card.',
-        property: :cmc
-
-  field :imageName, types.String,
-        'Returns the image name of the magic card. This field is the name in ' \
-        'lowercase.',
-        property: :image_name
+        property: :converted_mana_cost
 
   field :layout, types.Int,
         'Returns the layout of the magic card.',
@@ -72,31 +67,18 @@ Types::CardType = GraphQL::ObjectType.define do
         'this field returns null.',
         property: :watermark
 
-  field :flavor, types.String,
+  field :flavorText, types.String,
         'Returns the flavour text printed on the magic card.',
-        property: :flavor
+        property: :flavor_text
 
-  field :mciNumber, types.String,
-        'Returns the MCI number of the magic card.',
-        property: :mci_number
-
-  field :border, types.String,
+  field :borderColor, types.String,
         'Returns the border color of the magic card. This field will return ' \
         'null, black, silver, or white.',
-        property: :border
-
-  field :releaseDate, types.String,
-        'Returns the release date of the magic card. If this field is null, ' \
-        'you should use the Magic Set release date as a fallback.',
-        property: :release_date
+        property: :border_color
 
   field :loyalty, types.Int,
         'Returns the loyalty value of the magic card.',
         property: :loyalty
-
-  field :reserved, types.Boolean,
-        'Returns whether the card is on the reserved list.',
-        property: :reserved
 
   field :hand, types.Int,
         'Returns the maximum hand size modifier. This field returns null, ' \
@@ -108,13 +90,77 @@ Types::CardType = GraphQL::ObjectType.define do
         'except for Vanguard cards.',
         property: :life
 
-  field :timeshifted, types.Boolean,
-        'Returns whether the magic card is timeshifted.',
-        property: :timeshifted
-
   field :starter, types.Boolean,
         'Returns whether the magic card was released in a core box set.',
         property: :starter
+
+  field :duelDeck, types.String,
+        'Returns the name of the duel deck it is released in.',
+        property: :duel_deck
+
+  field :faceConvertedManaCost, types.Float,
+        'Returns the face converted mana cost of the card.',
+        property: :face_converted_mana_cost
+
+  field :frameEffect, types.String,
+        'Returns the frame effect of the card.',
+        property: :frame_effect
+
+  field :frameVersion, types.String,
+        'Returns the frame version of the card.',
+        property: :frame_version
+
+  field :hasFoil, types.Boolean,
+        'Returns whether the card has a foil version.',
+        property: :has_foil
+
+  field :hasNonFoil, types.Boolean,
+        'Returns whether the card has a non-foil version.',
+        property: :has_non_foil
+
+  field :isAlternate, types.Boolean,
+        'Returns whether the card is an alternate version.',
+        property: :is_alternate
+
+  field :isFoilOnly, types.Boolean,
+        'Returns whether the card is only printed in foil.',
+        property: :is_foil_only
+
+  field :isOnlineOnly, types.Boolean,
+        'Returns whether the card is only available online.',
+        property: :is_online_only
+
+  field :isReserved, types.Boolean,
+        'Returns whether the card is on the reserved list.',
+        property: :is_reserved
+
+  field :isTimeshifted, types.Boolean,
+        'Returns whether the card is timeshifted.',
+        property: :is_timeshifted
+
+  field :isOversized, types.Boolean,
+        'Returns whether the card is oversized.',
+        property: :is_oversized
+
+  field :legalities, Scalars::Json,
+        'Returns the legality of the card in various formats.',
+        property: :legalities
+
+  field :originalText, types.String,
+        'Returns the original text on the card.',
+        property: :original_text
+
+  field :originalType, types.String,
+        'Returns the original type on the card.',
+        property: :original_type
+
+  field :side, types.String,
+        'If printed in a duel deck, returns the side of the duel deck its printed in.',
+        property: :side
+
+  field :tcgplayerProductId, types.String,
+        'Returns the tcgplayer product id of the card',
+        property: :tcgplayer_product_id
 
   field :colorIdentities, types[Types::ColorIdentityType],
         'Returns a list of color identities for the magic card.',
