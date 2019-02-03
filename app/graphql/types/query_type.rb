@@ -31,11 +31,4 @@ Types::QueryType = GraphQL::ObjectType.define do
       Color.all
     }
   end
-
-  field :ColorIdentities, types[Types::ColorIdentityType] do
-    description 'Returns structured information about magic card color identities.'
-    resolve ->(_, _, _) {
-      ColorIdentity.all
-    }
-  end
 end
