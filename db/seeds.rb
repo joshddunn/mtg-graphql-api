@@ -1,4 +1,5 @@
 require 'json'
+require 'pry'
 require 'zip'
 
 VERSION = '4.2.1'.freeze
@@ -419,10 +420,14 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
         # card token assoc
         if card[:reverseRelated].present?
           card[:reverseRelated].each do |name|
-            card_token_information.push CardTokenAssociation.new(
-              token_id: Token.where(identifier: card[:uuid]).first.id,
-              card_id: Card.where(name: name).first.id
-            )
+            # its possible for tokens to be the only reference to another token
+            card_id = Card.where(name: name).first&.id
+            if card_id
+              card_token_information.push CardTokenAssociation.new(
+                token_id: Token.where(identifier: card[:uuid]).first.id,
+                card_id: card_id
+              )
+            end
           end
         end
       end
