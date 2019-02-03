@@ -15,15 +15,6 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "alternative_names", force: :cascade do |t|
-    t.bigint "magic_set_id"
-    t.string "identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["identifier"], name: "index_alternative_names_on_identifier"
-    t.index ["magic_set_id"], name: "index_alternative_names_on_magic_set_id"
-  end
-
   create_table "artists", force: :cascade do |t|
     t.string "identifier"
     t.datetime "created_at", null: false
@@ -150,14 +141,6 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
     t.index ["card_id"], name: "index_foreign_data_on_card_id"
   end
 
-  create_table "magic_rarities_codes", force: :cascade do |t|
-    t.bigint "magic_set_id"
-    t.string "identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["magic_set_id"], name: "index_magic_rarities_codes_on_magic_set_id"
-  end
-
   create_table "magic_sets", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -279,15 +262,6 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
     t.index ["magic_set_id"], name: "index_tokens_on_magic_set_id"
   end
 
-  create_table "translations", force: :cascade do |t|
-    t.bigint "magic_set_id"
-    t.string "code"
-    t.string "identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["magic_set_id"], name: "index_translations_on_magic_set_id"
-  end
-
   create_table "type_associations", force: :cascade do |t|
     t.bigint "card_id"
     t.bigint "type_id"
@@ -313,7 +287,6 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
     t.index ["variation_id"], name: "index_variations_on_variation_id"
   end
 
-  add_foreign_key "alternative_names", "magic_sets"
   add_foreign_key "boosters", "card_descriptions"
   add_foreign_key "boosters", "magic_sets"
   add_foreign_key "cards", "artists"
@@ -325,7 +298,6 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
   add_foreign_key "color_indicator_associations", "cards"
   add_foreign_key "color_indicator_associations", "colors"
   add_foreign_key "foreign_data", "cards"
-  add_foreign_key "magic_rarities_codes", "magic_sets"
   add_foreign_key "magic_sets", "blocks"
   add_foreign_key "printing_associations", "cards"
   add_foreign_key "printing_associations", "magic_sets"
@@ -342,7 +314,6 @@ ActiveRecord::Schema.define(version: 2019_02_03_080831) do
   add_foreign_key "token_color_indicator_associations", "tokens"
   add_foreign_key "tokens", "artists"
   add_foreign_key "tokens", "magic_sets"
-  add_foreign_key "translations", "magic_sets"
   add_foreign_key "type_associations", "cards"
   add_foreign_key "type_associations", "types"
   add_foreign_key "variations", "cards"

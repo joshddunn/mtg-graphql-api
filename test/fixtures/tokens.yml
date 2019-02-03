@@ -12,7 +12,7 @@ one:
   side: MyString
   text: MyString
   toughness: MyString
-  type: 
+  token_type:
   identifier: MyString
   watermark: MyString
 
@@ -28,6 +28,6 @@ two:
   side: MyString
   text: MyString
   toughness: MyString
-  type: 
+  token_type:
   identifier: MyString
   watermark: MyString

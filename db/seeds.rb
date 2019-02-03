@@ -154,27 +154,6 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
         end
       end
 
-      # alternate names
-      # if value[:names].present?
-      #   value[:names].each do |name|
-      #     AlternativeName.new(magic_set_id: set.id, identifier: name).save!
-      #   end
-      # end
-
-      # magic rarities code
-      # if value[:magicRaritiesCodes].present?
-      #   value[:magicRaritiesCodes].each do |code|
-      #     MagicRaritiesCode.new(magic_set_id: set.id, identifier: code).save!
-      #   end
-      # end
-
-      # translation
-      # if value[:translations].present?
-      #   value[:translations].each do |code, identifier|
-      #     Translation.new(magic_set_id: set.id, code: code, identifier: identifier).save!
-      #   end
-      # end
-
       # cards
       information = value[:cards].map do |card|
         Card.new(
@@ -410,11 +389,12 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
       printing_information = []
 
       value[:cards].each do |card|
+        id = Card.where(identifier: card[:uuid]).first.id
         # variation assoc
         if card[:variations].present?
           card[:variations].each do |variation|
             variation_information.push Variation.new(
-              card_id: Card.where(identifier: card[:uuid]).first.id,
+              card_id: id,
               variation_id: Card.where(identifier: variation).first.id
             )
           end
@@ -422,10 +402,9 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
 
         # printing assoc
         if card[:printings].present?
-          info = Card.find_by(identifier: card[:uuid])
           card[:printings].each do |code|
             printing_information.push PrintingAssociation.new(
-              card_id: info.id,
+              card_id: id,
               magic_set_id: MagicSet.where(code: code).first.id
             )
           end

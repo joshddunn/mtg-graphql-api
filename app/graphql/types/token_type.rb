@@ -1,4 +1,4 @@
-Types::Token = GraphQL::ObjectType.define do
+Types::TokenType = GraphQL::ObjectType.define do
   name 'Token'
   description 'Contains information about magic token.'
 
