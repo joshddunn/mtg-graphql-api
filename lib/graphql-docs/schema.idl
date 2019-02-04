@@ -499,6 +499,11 @@ type MagicSet {
   code: String
 
   """
+  Returns the alternate code of the magic set.
+  """
+  codeV3: String
+
+  """
   Returns whether the magic set was only released online.
   """
   isFoilOnly: Boolean
