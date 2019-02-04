@@ -8,6 +8,10 @@ Types::MagicSetType = GraphQL::ObjectType.define do
 
   field :code, types.String,
         'Returns the code of the magic set.',
+        property: :code
+
+  field :codeV3, types.String,
+        'Returns the alternate code of the magic set.',
         property: :code_v3
 
   field :releaseDate, types.String,
