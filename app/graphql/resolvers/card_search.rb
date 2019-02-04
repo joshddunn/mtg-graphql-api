@@ -58,7 +58,7 @@ module Resolvers
       scope = Card.all
 
       scope = scope.where('lower(name) = ?', value['name'].downcase) unless value['name'].nil?
-      scope = scope.where('lower(name) like ?', "#{value['nameLike'].gsub(/\%/, '')}%") unless value['nameLike'].nil?
+      scope = scope.where('lower(name) like ?', "#{value['nameLike'].gsub(/\%/, '').downcase}%") unless value['nameLike'].nil?
       scope = scope.includes(:types).where('types.identifier': value['type']) unless value['type'].nil?
       scope = scope.includes(:subtypes).where('subtypes.identifier': value['subtype']) unless value['subtype'].nil?
       scope = scope.includes(:supertypes).where('supertypes.identifier': value['supertype']) unless value['supertype'].nil?

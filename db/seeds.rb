@@ -421,7 +421,7 @@ Zip::File.open("#{file_path}.zip") do |zipfile|
         if card[:reverseRelated].present?
           card[:reverseRelated].each do |name|
             # its possible for tokens to be the only reference to another token
-            card_id = Card.where(name: name).first&.id
+            card_id = Card.joins(:magic_set).where(name: name, magic_sets: { code: key }).first&.id
             if card_id
               card_token_information.push CardTokenAssociation.new(
                 token_id: Token.where(identifier: card[:uuid]).first.id,
